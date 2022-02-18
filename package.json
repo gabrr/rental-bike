@@ -1,7 +1,9 @@
 {
-  "dependencies": {
-    "react-datetime": "^3.1.1",
-    "react-datetime-range-picker": "^3.0.0",
-    "react-rating": "^2.0.5"
-  }
+  "name": "Biker",
+  "version": "1.0.0",
+  "description": "App to manage rental bikes",
+  "main": "index.js",
+  "repository": "git@git.toptal.com:screening/Gabriel-Oliveira-2.git",
+  "author": "gabrr <g.webdevelopr@gmail.com>",
+  "license": "MIT"
 }
