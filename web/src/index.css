@@ -1,19 +1,26 @@
 :root {
-    --background-color: #fff;
-    --input-background: #c2c2c2;
-    --primary-text: #222;
-    --secondary-text: #b9b9b9;
-    --negative: #e04c4c;
-    --positive: #139730;
+	--background-color: #fff;
+	--input-background: #e1e1e1;
+	--primary-text: #222;
+	--secondary-text: #b9b9b9;
+	--negative: #da0f0f;
+	--positive: #139730;
+	--available-indicator: #21d704;
+	--bike-color-pink: #e80066;
+	--bike-color-black: #1e1c1a;
+	--bike-color-blue: #017acb;
+	--bike-color-pink: #f2f97e;
+
+	--button-default: #161616;
+	--button-text-default: #FFFFFF;
+
+	--border-radius: 10px;
 }
 
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+body, html {
+	margin: 0;
+	font-family: "Poppins", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 62.5%;
 }

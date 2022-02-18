@@ -1,22 +1,24 @@
 import React from 'react'
 import {
-  Routes as BrowserRoutes,
+  Routes,
   Route,
 } from "react-router-dom";
 
-import { SignIn, Home } from 'pages'
+import { SignIn, Home, NoExisting, SignUp } from 'pages'
 import { RequireAuth } from 'routes/requireAuth';
 
 
 const routes = [
+		{ title: 'Home', component: Home, path: '/' , isProtected: true },
+    { title: '404', component: NoExisting, path: '*' , isProtected: false },
     { title: 'Sign In', component: SignIn, path: '/signin', isProtected: false },
-    { title: 'Home', component: Home, path: '/' , isProtected: true },
+    { title: 'Sign Up', component: SignUp, path: '/signup', isProtected: false },
 ]
 
-export const Routes: React.FC<{}> = () => {
-
+export const AppRoutes: React.FC = () => {
+	
     return (
-        <BrowserRoutes>
+        <Routes>
 					{routes.map(({ isProtected, component: Component, path }) => {
 						if (!isProtected) return <Route path={path} element={<Component />} />
 
@@ -30,7 +32,7 @@ export const Routes: React.FC<{}> = () => {
 								}
 							/>
 						)
-					})}          
-        </BrowserRoutes>
+					})}
+        </Routes>
     )
 }
