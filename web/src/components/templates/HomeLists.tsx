@@ -31,7 +31,11 @@ export const HomeLists: React.FC<Props> = ({ role, tab, children }) => {
 					{isAdmin && <Toggle />}
 				</div>
 			</div>
-			{children}
+
+			<div className="list">
+				{children}
+			</div>
+
 			<FilterOptions isOpen={filterOptions} />
 		</Div>
 	)
@@ -39,13 +43,15 @@ export const HomeLists: React.FC<Props> = ({ role, tab, children }) => {
 
 const Div = styled.div`
 	width: 100%;
-
+	padding-bottom: 4rem;
+	
 	.header {
 		width: 90%;
+		min-height: 90px;
 		margin: 1.5rem auto 0;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		align-items: baseline;
 	}
 
 	.page_title {
@@ -73,5 +79,11 @@ const Div = styled.div`
 		display: flex;
 		align-items: center;
 		gap: 2rem;
+	}
+
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.7rem;
 	}
 `

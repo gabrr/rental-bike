@@ -1,11 +1,11 @@
-import { IItem } from "@types";
+import { IBike } from "types";
 import { ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM } from "./constants";
 
-const INITIAL_STATE: IItem[] = []
+const INITIAL_STATE: IBike[] = []
 
 interface IAction {
     type: string,
-    payload: { item: IItem }
+    payload: { item: IBike }
     ids?: string[]
 }
 

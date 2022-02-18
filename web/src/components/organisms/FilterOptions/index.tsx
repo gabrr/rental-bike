@@ -37,7 +37,7 @@ export const FilterOptions: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
 			<section>
 				<p className="label">Location</p>
 				<select name="locations" id="locations">
-					<option value="">--Please choose an option--</option>
+					<option value="">Select a location</option>
 					{locations.map((location, index) => {
 						return (
 							<option key={"location " + index} value={location}>{location}</option>

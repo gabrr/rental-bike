@@ -1,4 +1,4 @@
-import { isInputValidProps } from './../@types/inputValidator.d';
+import { isInputValidProps } from 'types'
 
 export const isInputValid: (props: isInputValidProps) => boolean = ({ type, value }) => {
     if (!type) return false

@@ -1,1 +1,0 @@
-export type { IItem } from './item.d';

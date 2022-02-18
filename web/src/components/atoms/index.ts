@@ -6,4 +6,5 @@ export { Button } from "./Button"
 export { LinkButton } from "./LinkButton"
 export { Toggle } from "./Toggle"
 export { Star } from "./Star"
+export { Pin } from "./Pin"
 
