@@ -5,6 +5,7 @@ import a2 from 'assets/a2.png'
 import a3 from 'assets/a3.png'
 import k1 from 'assets/k1.png'
 import k2 from 'assets/k2.png'
+import _ from 'lodash'
 
 
 export const bikes: IBike[] = [
@@ -17,10 +18,23 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
+				id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
-			}
+			},
+			{
+				id: _.uniqueId(),
+				userId: "hhjnvjkj",
+				startPeriod: new Date(),
+				endPeriod: new Date(),
+			},
+			{
+				id: _.uniqueId(),
+				userId: "dfyguhjbh",
+				startPeriod: new Date(),
+				endPeriod: new Date(),
+			},
 		]
 	},
 	{
@@ -32,6 +46,7 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
+				id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
@@ -47,6 +62,7 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
+				id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
@@ -62,6 +78,7 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
+				id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
@@ -77,6 +94,7 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
+				id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
@@ -92,6 +110,7 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
+				id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),

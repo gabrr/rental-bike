@@ -17,7 +17,8 @@ export const EditBike = () => {
 			id: 'hjbkn',
 			user: 'Gabriel Oliveira',
 			bike: 'Z2',
-			period: 'Tuesday, 25 Feb 14:00 to Wed, 26 Feb 14:00',
+			startPeriod: new Date(),
+			endPeriod: new Date(),
 		}
 	]
 
@@ -30,7 +31,11 @@ export const EditBike = () => {
 					<Input className='inputs' placeholder='Color' />
 					<Input className='inputs' placeholder='Location' />
 				</form>
-				<ReactRating className='react_rating' emptySymbol={<Star />} fullSymbol={<Star isFull />} />
+
+				<div className='react_rating'>
+					<p className="rating_title">Initial Rating</p>
+					<ReactRating emptySymbol={<Star />} fullSymbol={<Star isFull />} />
+				</div>
 
 				<div className="upload_file">
 					Upload File
@@ -45,7 +50,7 @@ export const EditBike = () => {
 					</Button>
 				</section>
 
-				<ReservationList reservations={reservations} />
+				<ReservationList hideReserved reservations={reservations} />
 
 			</Div>
 		</CreateEdit>
@@ -58,6 +63,7 @@ const Div = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	padding-bottom: 5rem;
 
 	.inputs {
 		width: 100%;
@@ -65,9 +71,14 @@ const Div = styled.div`
 	}
 	
 	.react_rating {
-		margin: 10px 0;
+		margin: 2rem 0 3rem;
 	}
 
+	.rating_title {
+		font-weight: 600;
+		font-size: 1.4rem;
+		margin: 1rem 0;
+	}
 
 	.upload_file {
 		height: 100px;

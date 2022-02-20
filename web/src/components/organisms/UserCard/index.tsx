@@ -13,13 +13,13 @@ interface Props {
 		reservations: {
 			id: string
 			bike: string
-			period: string
+			startPeriod: Date,
+			endPeriod: Date,
 		}[]
 	}
 }
 
 export const UserCard: React.FC<Props> = ({ user }) => {
-
 	const [isExpanded, setisExpanded] = useState(false)
 	const navigate = useNavigate()
 

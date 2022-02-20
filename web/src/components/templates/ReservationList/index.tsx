@@ -1,6 +1,7 @@
 import { Deleteicon } from 'components/atoms'
 import React from 'react'
 import styled from 'styled-components'
+import { combineStartEndPeriod } from 'utils'
 
 interface Props {
 	hideReservator?: boolean
@@ -9,7 +10,8 @@ interface Props {
 		id: string
 		user?: string
 		bike?: string
-		period: string
+		startPeriod: Date,
+		endPeriod: Date,
 	}[]
 }
 
@@ -33,9 +35,8 @@ export const ReservationList: React.FC<Props> = ({ reservations, hideReservator,
 								<div className="left">
 									{!hideReservator && <p className="reservator">{reservation.user}</p>}
 									{!hideReserved && <p className="bike_reserved">{reservation.bike}</p>}
-									<p className="period">{reservation.period}</p>
+									<p className="period">{combineStartEndPeriod(reservation.startPeriod, reservation.endPeriod)}</p>
 								</div>
-
 								<button className="cancel_button" onClick={(e) => cancelReservation(e, reservation.id)}>
 									<Deleteicon fill={'var(--button-text-default)'} />
 								</button>

@@ -7,12 +7,14 @@ export const users = [
 			{
 				id: 'fghjkljjh',
 				bike: 'Bike Z2',
-				period: 'Tuesday, 25 Feb 14:00 to Wed, 26 Feb 14:00'
+				startPeriod: new Date(),
+				endPeriod: new Date(),
 			},
 			{
 				id: 'dtyumncfgh',
 				bike: 'Bike Z2',
-				period: 'Tuesday, 25 Feb 14:00 to Wed, 26 Feb 14:00'
+				startPeriod: new Date(),
+				endPeriod: new Date(),
 			},
 		]
 	},
@@ -24,12 +26,14 @@ export const users = [
 			{
 				id: 'nbhjn',
 				bike: 'Z2',
-				period: 'Tuesday, 25 Feb 14:00 to Wed, 26 Feb 14:00'
+				startPeriod: new Date(),
+				endPeriod: new Date(),
 			},
 			{
 				id: 'iuytrfgbn',
 				bike: 'Z2',
-				period: 'Tuesday, 25 Feb 14:00 to Wed, 26 Feb 14:00'
+				startPeriod: new Date(),
+				endPeriod: new Date(),
 			},
 		]
 	},
@@ -41,12 +45,14 @@ export const users = [
 			{
 				id: 'gvhjnb',
 				bike: 'Z2',
-				period: 'Tuesday, 25 Feb 14:00 to Wed, 26 Feb 14:00'
+				startPeriod: new Date(),
+				endPeriod: new Date(),
 			},
 			{
 				id: 'gjbjkb',
 				bike: 'Z2',
-				period: 'Tuesday, 25 Feb 14:00 to Wed, 26 Feb 14:00'
+				startPeriod: new Date(),
+				endPeriod: new Date(),
 			},
 		]
 	},
