@@ -18,7 +18,7 @@ export const SignIn = () => {
 		e.preventDefault()
 		setisLoading(true)
 
-		auth.signin(signin('user', () => navigate('/')))
+		auth.signin(() => signin('user', () => navigate('/')))
 	}
 
 	const goToSignUp = () => navigate('/signup')

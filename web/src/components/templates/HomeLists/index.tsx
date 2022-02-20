@@ -2,19 +2,23 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { FilterIcon, Toggle } from 'components/atoms'
-import { FilterOptions } from 'components/organisms'
+import { FilterOptions, SideMenu } from 'components/organisms'
 
 interface Props {
 	tab: 'Bikes' | 'Users'
 	role: 'admin' | 'user'
+	hideFilter?: boolean
 }
 
-export const HomeLists: React.FC<Props> = ({ role, tab, children }) => {
+export const HomeLists: React.FC<Props> = ({ role, tab, hideFilter, children }) => {
 
 	const [filterOptions, setfilterOptions] = useState(false)
+	const [sideMenu, setsideMenu] = useState(false)
 	const isAdmin = (role === 'admin')
 
 	const toggleFilterOptions = () => setfilterOptions(state => !state)
+
+	const toggleSideMenu = () => setsideMenu(state => !state)
 
 	return (
 		<Div>
@@ -25,10 +29,10 @@ export const HomeLists: React.FC<Props> = ({ role, tab, children }) => {
 				</div>
 
 				<div className="right">
-					<button className='filter_button' onClick={toggleFilterOptions}>
+					{!hideFilter && <button className='header_button' onClick={toggleFilterOptions}>
 						<FilterIcon />
-					</button>
-					{isAdmin && <Toggle />}
+					</button>}
+					{isAdmin && <button className='header_button' onClick={toggleSideMenu}><Toggle isActive={sideMenu} /></button>}
 				</div>
 			</div>
 
@@ -37,6 +41,8 @@ export const HomeLists: React.FC<Props> = ({ role, tab, children }) => {
 			</div>
 
 			<FilterOptions isOpen={filterOptions} />
+			<SideMenu isOpen={sideMenu} toggleSideMenu={toggleSideMenu} />
+
 		</Div>
 	)
 }
@@ -69,7 +75,7 @@ const Div = styled.div`
 		line-height: 0rem;
 	}
 
-	.filter_button {
+	.header_button {
 		background: transparent;
 		border: none;
 		cursor: pointer;

@@ -4,6 +4,7 @@ import ReactRating from 'react-rating'
 
 import { Pin, Star } from 'components/atoms'
 import { IBike } from 'types'
+import { popping } from 'animations'
 
 
 interface Props {
@@ -21,11 +22,11 @@ export const BikeCard: React.FC<Props> = ({ bike }) => {
 			</div>
 
 			<div className="card_right">
-				<p className="bike_name">Bike Z2</p>
-				<p className="color">Black</p>
+				<p className="bike_name">{bike.name}</p>
+				<p className="color">{bike.color}</p>
 				<div className="location">
 					<Pin />
-					<p className="address">Centro, Florianópolis</p>
+					<p className="address">{bike.address}</p>
 				</div>
 				<ReactRating emptySymbol={<Star />} fullSymbol={<Star isFull />} />
 			</div>
@@ -35,6 +36,7 @@ export const BikeCard: React.FC<Props> = ({ bike }) => {
 
 const Div = styled.div<{ isAvailable: boolean }>`
 	width: 90%;
+	animation: ${popping} 300ms ease-in-out;
 	margin: 0 auto;
 	padding: 1.7rem 0;
 	min-height: 100px;

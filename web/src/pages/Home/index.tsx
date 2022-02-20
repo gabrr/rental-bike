@@ -1,16 +1,15 @@
 import React from 'react'
 import { HomeLists } from 'components/templates/HomeLists'
-import { BikeCard, UserCard } from 'components/organisms'
+import { BikeCard } from 'components/organisms'
 import { bikes } from 'mock/bikes'
-import styled from 'styled-components'
 
 export const Home = () => {
 
 	return (
-		<HomeLists role='user' tab='Bikes'>
+		<HomeLists role='admin' tab='Bikes'>
 			{bikes.map((bike) => {
 				return (
-					<BikeCard bike={bike} />
+					<BikeCard bike={bike} key={bike.id} />
 				)
 			})}
 		</HomeLists>

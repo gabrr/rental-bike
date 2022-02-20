@@ -23,4 +23,5 @@ body, html {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 62.5%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }

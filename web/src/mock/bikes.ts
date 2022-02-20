@@ -14,8 +14,13 @@ export const bikes: IBike[] = [
 		model: 'z',
 		color: 'blue',
 		img: z1,
+		address: 'Centro, Florianópolis',
 		reservations: [
-		
+			{
+				userId: "userIdname",
+				startPeriod: new Date(),
+				endPeriod: new Date(),
+			}
 		]
 	},
 	{
@@ -24,6 +29,7 @@ export const bikes: IBike[] = [
 		model: 'a',
 		color: 'blue',
 		img: a1,
+		address: 'Centro, Florianópolis',
 		reservations: [
 			{
 				userId: "userIdname",
@@ -38,6 +44,7 @@ export const bikes: IBike[] = [
 		model: 'a',
 		color: 'yellow',
 		img: a2,
+		address: 'Centro, Florianópolis',
 		reservations: [
 			{
 				userId: "userIdname",
@@ -52,6 +59,7 @@ export const bikes: IBike[] = [
 		model: 'a',
 		color: 'blue',
 		img: a3,
+		address: 'Centro, Florianópolis',
 		reservations: [
 			{
 				userId: "userIdname",
@@ -66,6 +74,7 @@ export const bikes: IBike[] = [
 		model: 'k',
 		color: 'blue',
 		img: k1,
+		address: 'Centro, Florianópolis',
 		reservations: [
 			{
 				userId: "userIdname",
@@ -80,6 +89,7 @@ export const bikes: IBike[] = [
 		model: 'k',
 		color: 'pink',
 		img: k2,
+		address: 'Centro, Florianópolis',
 		reservations: [
 			{
 				userId: "userIdname",

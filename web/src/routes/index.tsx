@@ -4,7 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import { SignIn, Home, NoExisting, SignUp } from 'pages'
+import { SignIn, Home, NoExisting, SignUp, Users, AddBike, CreateUser } from 'pages'
 import { RequireAuth } from 'routes/requireAuth';
 
 
@@ -13,17 +13,21 @@ const routes = [
     { title: '404', component: NoExisting, path: '*' , isProtected: false },
     { title: 'Sign In', component: SignIn, path: '/signin', isProtected: false },
     { title: 'Sign Up', component: SignUp, path: '/signup', isProtected: false },
+    { title: 'Users', component: Users, path: '/users', isProtected: true },
+    { title: 'Add Bike', component: AddBike, path: '/add-bike', isProtected: true },
+    { title: 'Create User', component: CreateUser, path: '/create-user', isProtected: true },
 ]
 
 export const AppRoutes: React.FC = () => {
 	
     return (
         <Routes>
-					{routes.map(({ isProtected, component: Component, path }) => {
-						if (!isProtected) return <Route path={path} element={<Component />} />
+					{routes.map(({ isProtected, component: Component, path }, index) => {
+						if (!isProtected) return <Route key={index+path} path={path} element={<Component />} />
 
 						return (
 							<Route
+								key={index+path}
 								path={path}
 								element={
 									<RequireAuth>

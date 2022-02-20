@@ -4,6 +4,7 @@ export interface IBike {
 		model: string
 		color: string
 		img: string
+		address: string
 		reservations: {
 			userId: string
 			startPeriod: Date
