@@ -7,19 +7,18 @@ import styled from 'styled-components'
 
 interface Props {
 	isOpen: boolean
-	toggleSideMenu: () => void
 }
 
-export const SideMenu: React.FC<Props> = ({ isOpen, toggleSideMenu }) => {
+export const SideMenu: React.FC<Props> = ({ isOpen }) => {
 	const { signout } = useAuth()
 	const navigate = useNavigate()
 
 	const handleSignUp = () => auth.signout(signout)
 
-	const goToUsers = () => navigate('/users'); toggleSideMenu() 
-	const goToBikes = () => navigate('/'); toggleSideMenu() 
-	const goToAddBike = () => navigate('/add-bike'); toggleSideMenu() 
-	const goToCreateUser = () => navigate('/create-user'); toggleSideMenu()
+	const goToUsers = () => navigate('/users')
+	const goToBikes = () => navigate('/')
+	const goToAddBike = () => navigate('/add-bike')
+	const goToCreateUser = () => navigate('/create-user')
 
 
 	useEffect(() => {

@@ -2,7 +2,7 @@ class Auth {
   authenticated: boolean
 
   constructor() {
-    this.authenticated = false;
+    this.authenticated = true;
   }
 
   signin(cb: any) {

@@ -30,7 +30,7 @@ export const CreateEdit: React.FC<Props> = ({ title, role, children }) => {
 
 			{children}
 
-			<SideMenu isOpen={sideMenu} toggleSideMenu={toggleSideMenu} />	
+			<SideMenu isOpen={sideMenu} />	
 		</Div>
 	)
 }

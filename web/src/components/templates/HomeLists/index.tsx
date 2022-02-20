@@ -40,8 +40,8 @@ export const HomeLists: React.FC<Props> = ({ role, tab, hideFilter, children }) 
 				{children}
 			</div>
 
-			<FilterOptions isOpen={filterOptions} />
-			<SideMenu isOpen={sideMenu} toggleSideMenu={toggleSideMenu} />
+			{/*<FilterOptions isOpen={filterOptions} />
+			<SideMenu isOpen={sideMenu} />*/}
 
 		</Div>
 	)

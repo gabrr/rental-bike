@@ -4,7 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import { SignIn, Home, NoExisting, SignUp, Users, AddBike, CreateUser } from 'pages'
+import { SignIn, Home, NoExisting, SignUp, Users, AddBike, CreateUser, EditUser, EditBike } from 'pages'
 import { RequireAuth } from 'routes/requireAuth';
 
 
@@ -16,6 +16,8 @@ const routes = [
     { title: 'Users', component: Users, path: '/users', isProtected: true },
     { title: 'Add Bike', component: AddBike, path: '/add-bike', isProtected: true },
     { title: 'Create User', component: CreateUser, path: '/create-user', isProtected: true },
+    { title: 'Edit User', component: EditUser, path: '/edit-user/:userId', isProtected: true },
+    { title: 'Edit Bike', component: EditBike, path: '/edit-bike/:bikeId', isProtected: true },
 ]
 
 export const AppRoutes: React.FC = () => {

@@ -43,9 +43,9 @@ const Div = styled.div<{ isAvailable: boolean }>`
 	background-color: var(--background-color);
 	border-radius: var(--border-radius);
 	display: flex;
+	box-shadow: 5px 5px 17px 0px rgba(0, 0, 0, 0.12);
 
-	border: ${({ isAvailable }) => isAvailable ? "1px solid #21D704" : "none"};
-	box-shadow: ${({ isAvailable }) => isAvailable ? "5px 5px 17px 0px rgba(23, 237, 70, 0.12)" : '5px 5px 17px 0px rgba(0, 0, 0, 0.08)'};
+	filter: ${({ isAvailable }) => isAvailable ? 'grayscale(0)' : 'grayscale(1)'};
 	opacity:${({ isAvailable }) => isAvailable ? '1' : '0.3'};
 	pointer-events: ${({ isAvailable }) => isAvailable ? 'all' : 'none'};
 
