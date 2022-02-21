@@ -1,6 +1,7 @@
 import { Toggle } from 'components/atoms'
 import { SideMenu } from 'components/organisms'
-import React, { useState } from 'react'
+import { useSideMenu } from 'hooks/sideMenu'
+import React from 'react'
 import styled from 'styled-components'
 
 interface Props {
@@ -9,11 +10,9 @@ interface Props {
 }
 
 export const CreateEdit: React.FC<Props> = ({ title, role, children }) => {
-	const [sideMenu, setsideMenu] = useState(false)
+	const { toggle, isOpen } = useSideMenu()
 	
 	const isAdmin = (role === 'admin')
-
-	const toggleSideMenu = () => setsideMenu(state => !state)
 
 	return (
 		<Div>
@@ -24,13 +23,13 @@ export const CreateEdit: React.FC<Props> = ({ title, role, children }) => {
 				</div>
 
 				<div className="right">
-					{isAdmin && <button className='header_button' onClick={toggleSideMenu}><Toggle isActive={sideMenu} /></button>}
+					{isAdmin && <button className='header_button' onClick={toggle}><Toggle isActive={isOpen} /></button>}
 				</div>
 			</div>
 
 			{children}
 
-			<SideMenu isOpen={sideMenu} />	
+			<SideMenu />	
 		</Div>
 	)
 }

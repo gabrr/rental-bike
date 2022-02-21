@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import { FilterIcon, Toggle } from 'components/atoms'
-import { FilterOptions, SideMenu } from 'components/organisms'
+import { useSideMenu } from 'hooks/sideMenu'
+import { useFilter } from 'hooks/filter'
 
 interface Props {
 	tab: 'Bikes' | 'Users'
@@ -12,13 +13,10 @@ interface Props {
 
 export const HomeLists: React.FC<Props> = ({ role, tab, hideFilter, children }) => {
 
-	const [filterOptions, setfilterOptions] = useState(false)
-	const [sideMenu, setsideMenu] = useState(false)
+	const { isOpen: isMenuOpen, toggle: toggleMenu } = useSideMenu()
+	const { toggle: toggleFilter } = useFilter()
+
 	const isAdmin = (role === 'admin')
-
-	const toggleFilterOptions = () => setfilterOptions(state => !state)
-
-	const toggleSideMenu = () => setsideMenu(state => !state)
 
 	return (
 		<Div>
@@ -29,19 +27,16 @@ export const HomeLists: React.FC<Props> = ({ role, tab, hideFilter, children }) 
 				</div>
 
 				<div className="right">
-					{!hideFilter && <button className='header_button' onClick={toggleFilterOptions}>
+					{!hideFilter && <button className='header_button' onClick={toggleFilter}>
 						<FilterIcon />
 					</button>}
-					{isAdmin && <button className='header_button' onClick={toggleSideMenu}><Toggle isActive={sideMenu} /></button>}
+					{isAdmin && <button className='header_button' onClick={toggleMenu}><Toggle isActive={isMenuOpen} /></button>}
 				</div>
 			</div>
 
 			<div className="list">
 				{children}
 			</div>
-
-			{/*<FilterOptions isOpen={filterOptions} />
-			<SideMenu isOpen={sideMenu} />*/}
 
 		</Div>
 	)

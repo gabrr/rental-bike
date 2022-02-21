@@ -4,8 +4,11 @@ import DatetimeRangePicker from 'react-datetime-range-picker';
 import { Star } from 'components/atoms'
 import { ColorsOptions } from 'components/molecules';
 import ReactRating from 'react-rating'
+import { useFilter } from 'hooks/filter';
 
-export const FilterOptions: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
+export const FilterOptions: React.FC = () => {
+
+	const { isOpen } = useFilter()
 
 	const locations = [
 		"Centro, Florianópolis",

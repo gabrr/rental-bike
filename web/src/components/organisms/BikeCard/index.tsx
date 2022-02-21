@@ -60,7 +60,6 @@ const Div = styled.div<{ isAvailable: boolean, isExpanded: boolean }>`
 	padding: 1.7rem 5% 2.5rem;
 	height: ${({ isExpanded }) => isExpanded ? '260px' : '100px'};
 	overflow: ${({ isExpanded }) => isExpanded ? 'scroll' : 'hidden'};
-	transition: height 200ms ease-in-out;
 	background-color: var(--background-color);
 	border-radius: var(--border-radius);
 	display: flex;

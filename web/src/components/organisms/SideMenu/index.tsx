@@ -1,24 +1,27 @@
 import { LinkButton } from 'components/atoms'
 import { useAuth } from 'hooks/auth'
+import { useSideMenu } from 'hooks/sideMenu'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import auth from 'services/auth'
 import styled from 'styled-components'
 
-interface Props {
-	isOpen: boolean
-}
-
-export const SideMenu: React.FC<Props> = ({ isOpen }) => {
+export const SideMenu: React.FC = () => {
 	const { signout } = useAuth()
+	const { isOpen, toggle } = useSideMenu()
 	const navigate = useNavigate()
 
 	const handleSignUp = () => auth.signout(signout)
 
-	const goToUsers = () => navigate('/users')
-	const goToBikes = () => navigate('/')
-	const goToAddBike = () => navigate('/add-bike')
-	const goToCreateUser = () => navigate('/create-user')
+	const goAndCloseMenu = (path: string) => {
+		navigate(path)
+		toggle()
+	}
+
+	const goToUsers = () => goAndCloseMenu('/users')
+	const goToBikes = () => goAndCloseMenu('/')
+	const goToAddBike = () => goAndCloseMenu('/add-bike')
+	const goToCreateUser = () => goAndCloseMenu('/create-user')
 
 
 	useEffect(() => {
@@ -70,7 +73,7 @@ const Div = styled.div`
 	width: 100%;
 	height: 100vh;
 	background-color: var(--background-color);
-	transition: transform 300ms ease-in-out;
+	transition: transform 200ms ease-in-out;
 	transform: translateX(100%);
 	display: flex;
 	flex-direction: column;
