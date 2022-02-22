@@ -1,5 +1,14 @@
-import { sum } from '../utils/validation'
+const supertest = require("supertest")
+const server = require("server")
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(sum(1, 2)).toBe(3);
-});
+describe("Auth routers", () => {
+	test("No email should return 401", () => {
+		
+	})
+})
+
+describe("User routers", () => {
+	test("Get all users", async () => {
+		
+	})
+})

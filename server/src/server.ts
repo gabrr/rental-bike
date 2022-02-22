@@ -4,7 +4,7 @@ import routesSetup from 'setup/routesSetup'
 import middlewaresSetup from "setup/middlewaresSetup"
 import "setup/databaseSetup"
 
-const server = express()
+export const server = express()
 
 middlewaresSetup(server)
 routesSetup(server)

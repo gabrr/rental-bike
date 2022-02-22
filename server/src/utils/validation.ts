@@ -1,9 +1,5 @@
 import Joi from "joi"
 
-export function sum(a: number, b: number) {
-  return a + b;
-}
-
 export const signUpValidation = (body: any) => {
 	
 	const schema =  Joi.object({
