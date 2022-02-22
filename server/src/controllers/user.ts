@@ -27,7 +27,7 @@ class UserController {
 				const isPasswordValid = await bcrypt.compare(req.body.password, user.password)
 				if (!isPasswordValid) throw Error('E-mail or password invalid.')
 
-				const token = jwt.sign({ _id: user._id, role: user.role }, JWT_SECRET)
+				const token = jwt.sign({ _id: user._id, role: user.role }, JWT_SECRET, { expiresIn: "2h" })
 
 				res.header('auth-token', token)
 				return res.json(user)
@@ -55,7 +55,12 @@ class UserController {
 
 					const userCreated = new User(newUser)
 					await userCreated.save()
-					return res.json({ error, user: userCreated  })
+					
+					const token = jwt.sign({ _id: userCreated._id, role: userCreated.role }, JWT_SECRET, { expiresIn: "2h" })
+					res.header('auth-token', token)
+
+					const { password, ...userCreatedPL } = userCreated._doc
+					return res.json({ error, user: userCreatedPL  })
             
         } catch (error: any) {
             return res.status(400).json(error.message)
@@ -77,13 +82,25 @@ class UserController {
 
 		async createUser(req: Request, res: Response) {
 			try {
-				const { error } = signUpValidation(req.body)
-				if (error) throw Error(error.details[0].message)
-				
-				const newUser = await new User(req.body)
-				newUser.save()
+				const isEmailExisting = await User.findOne({ email: req.body.email })
 
-				return res.json({ User: newUser })
+				const { error } = signUpValidation(req.body)
+
+				if (error) throw Error(error.details[0].message)
+				if (isEmailExisting) throw Error('E-mail unavailable.')
+
+				const hashedPassword = await bcrypt.hashSync(req.body.password, 10)
+				
+				const newUser = {
+					...req.body,
+					password: hashedPassword
+				}
+
+				const userCreated = new User(newUser)
+				await userCreated.save()
+
+				const { password, ...userCreatedPL } = userCreated._doc
+				return res.json({ error, user: userCreatedPL  })
 
 			} catch (error: any) {
 				return res.json(error.message)

@@ -26,6 +26,7 @@ export const editUserValidation = (body: any) => {
 	
 	const schema = Joi.object({
 		name: Joi.string().min(2).required(),
+		role: Joi.string().valid('admin', 'user')
 	})
 
 	return schema.validate(body)
@@ -35,7 +36,7 @@ export const createBikeValidation = (body: any) => {
 	
 	const schema = Joi.object({
 		name: Joi.string().min(4).required(),
-		model: Joi.string().min(2).required(),
+		model: Joi.string().min(1).required(),
 		color: Joi.string().min(3).required(),
 		img: Joi.string().required(),
 		address: Joi.string().required(),
@@ -47,9 +48,9 @@ export const createBikeValidation = (body: any) => {
 export const editBikeValidation = (body: any) => {
 	
 	const schema = Joi.object({
-		name: Joi.string(),
-		model: Joi.string(),
-		color: Joi.string(),
+		name: Joi.string().min(4),
+		model: Joi.string().min(1),
+		color: Joi.string().min(3),
 		img: Joi.string(),
 		address: Joi.string(),
 	})

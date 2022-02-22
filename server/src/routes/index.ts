@@ -18,8 +18,8 @@ routes.post('/api/user/create-user', adminRoute, userController.createUser)
 // Bikes
 routes.get('/api/bike', protectedRoute, bikeController.index)
 routes.delete('/api/bike/delete-bike/:bikeId', adminRoute, bikeController.deletebike)
+routes.patch('/api/bike/edit-bike/:bikeId', adminRoute, bikeController.editbike)
 routes.post('/api/bike/create-bike', adminRoute, bikeController.createbike)
-routes.patch('/api/bike/edit-bike', adminRoute, bikeController.editbike)
 
 
 export default routes 
