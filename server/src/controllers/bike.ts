@@ -13,7 +13,7 @@ class BikeController {
         }
     }
 
-		async deletebike(req: Request, res: Response) {
+		async deleteBike(req: Request, res: Response) {
 			try {
 				const bikeId = req.params.bikeId
 				await Bike.deleteOne({ _id: bikeId })
@@ -25,7 +25,7 @@ class BikeController {
 			}
 		}
 
-		async createbike(req: Request, res: Response) {
+		async createBike(req: Request, res: Response) {
 			try {
 				const { error } = createBikeValidation(req.body)
 				if (error) throw Error(error.details[0].message)
@@ -40,7 +40,7 @@ class BikeController {
 			}
 		}
 		
-		async editbike(req: Request, res: Response) {
+		async editBike(req: Request, res: Response) {
 			try {
 				const bikeId = req.params.bikeId
 				const updatedBike = req.body

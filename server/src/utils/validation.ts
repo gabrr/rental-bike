@@ -57,3 +57,27 @@ export const editBikeValidation = (body: any) => {
 
 	return schema.validate(body)
 }
+
+export const createReservationValidation = (body: any) => {
+	
+	const schema = Joi.object({
+		userId: Joi.string().required(),
+		bikeId: Joi.string().required(),
+		startPeriod: Joi.string().isoDate().required(),
+		endPeriod: Joi.string().isoDate().required(),
+	})
+
+	return schema.validate(body)
+}
+
+export const editReservationValidation = (body: any) => {
+	
+	const schema = Joi.object({
+		userId: Joi.string(),
+		bikeId: Joi.string(),
+		startPeriod: Joi.string().isoDate(),
+		endPeriod: Joi.string().isoDate(),
+	})
+
+	return schema.validate(body)
+}

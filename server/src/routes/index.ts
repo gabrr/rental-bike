@@ -3,6 +3,7 @@ import { adminRoute, protectedRoute } from 'middlewares/tokenVerifier'
 
 import userController from 'controllers/user'
 import bikeController from 'controllers/bike'
+import reservationController from 'controllers/reservation'
 
 
 const routes = express.Router()
@@ -17,9 +18,16 @@ routes.post('/api/user/create-user', adminRoute, userController.createUser)
 
 // Bikes
 routes.get('/api/bike', protectedRoute, bikeController.index)
-routes.delete('/api/bike/delete-bike/:bikeId', adminRoute, bikeController.deletebike)
-routes.patch('/api/bike/edit-bike/:bikeId', adminRoute, bikeController.editbike)
-routes.post('/api/bike/create-bike', adminRoute, bikeController.createbike)
+routes.delete('/api/bike/delete-bike/:bikeId', adminRoute, bikeController.deleteBike)
+routes.patch('/api/bike/edit-bike/:bikeId', adminRoute, bikeController.editBike)
+routes.post('/api/bike/create-bike', adminRoute, bikeController.createBike)
 
+// Reservations
+routes.get('/api/reservation', adminRoute, reservationController.index)
+routes.get('/api/reservation/user/:userId', protectedRoute, reservationController.userReservations)
+routes.get('/api/reservation/bike/:bikeId', adminRoute, reservationController.bikeReservations)
+routes.delete('/api/reservation/delete-reservation/:reservationId', protectedRoute, reservationController.deleteReservation)
+routes.patch('/api/reservation/edit-reservation/:reservationId', protectedRoute, reservationController.editReservation)
+routes.post('/api/reservation/create-reservation', protectedRoute, reservationController.createReservation)
 
 export default routes 
