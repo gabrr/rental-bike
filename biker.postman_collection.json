@@ -1,0 +1,690 @@
+{
+	"info": {
+		"_postman_id": "4c1c81cc-47ce-4a74-9a03-670a7129c438",
+		"name": "biker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Peter Jhon\",\n    \"email\": \"peterjhonny@gmail.com\",\n    \"password\": \"hahahahhaha\",\n    \"role\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all users",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/user/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all reservations",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/reservation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all reservations user",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/reservation/user/6214e54d3d9f6dde23c7316f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"reservation",
+						"user",
+						"6214e54d3d9f6dde23c7316f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all reservations bike",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/reservation/bike/6214eb2a6e4f99b2a6c2af13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"reservation",
+						"bike",
+						"6214eb2a6e4f99b2a6c2af13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all bikes",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/bike",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"bike"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"peter@gmail.com\",\n    \"password\": \"hahahahhaha\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user/delete-user/6214e123e0d9df8ffb139d87",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"delete-user",
+						"6214e123e0d9df8ffb139d87"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete reservation",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user/delete-user/6214e123e0d9df8ffb139d87",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"delete-user",
+						"6214e123e0d9df8ffb139d87"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete bike",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/bike/delete-bike/6214e8a011ad31064d2d1829",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"bike",
+						"delete-bike",
+						"6214e8a011ad31064d2d1829"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Peter Han\",\n    \"email\": \"peter@gmail.com\",\n    \"password\": \"hahahahhaha\",\n    \"role\": \"user\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user/create-user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"create-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create reservation",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"6214e54d3d9f6dde23c7316f\",\n    \"bikeId\": \"6214eb2a6e4f99b2a6c2af13\",\n    \"startPeriod\": \"2022-02-22T14:34:48.718Z\",\n    \"endPeriod\": \"2022-03-22T14:34:48.718Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/reservation/create-reservation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"reservation",
+						"create-reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create bike",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Bike Z2\",\n    \"model\": \"Z\",\n    \"color\": \"red\",\n    \"img\": \"http://image-source.com\",\n    \"address\": \"Centro, Florianópolis\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/bike/create-bike",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"bike",
+						"create-bike"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Peter Han 2\",\n    \"role\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user/edit-user/6214e5cd179b4cd8226c3781",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"edit-user",
+						"6214e5cd179b4cd8226c3781"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Reservation",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"startPeriod\": \"2022-03-22T14:34:48.718Z\",\n    \"endPeriod\": \"2022-04-22T14:34:48.718Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/reservation/edit-reservation/6214f4a286a1976103a316b5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"reservation",
+						"edit-reservation",
+						"6214f4a286a1976103a316b5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Bike",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"model\": \"A\",\n    \"color\": \"blue\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/bike/edit-bike/6214eb2a6e4f99b2a6c2af13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"bike",
+						"edit-bike",
+						"6214eb2a6e4f99b2a6c2af13"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
