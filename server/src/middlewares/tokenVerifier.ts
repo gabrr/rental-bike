@@ -5,7 +5,7 @@ import type { IUserToken } from 'types/jwt'
 
 export const protectedRoute = (req: Request, res: Response, next: any) => {
 	try {
-		const token = req.header('auth-token') || ''
+		const token = req.cookies.token || ''
 		if (!token) throw Error("You have no permissions.")	
 
 		jwt.verify(token, JWT_SECRET)
@@ -19,7 +19,7 @@ export const protectedRoute = (req: Request, res: Response, next: any) => {
 
 export const adminRoute = (req: Request, res: Response, next: any) => {
 	try {
-		const token = req.header('auth-token') || ''
+		const token = req.cookies.token || ''
 		if (!token) throw Error("You have no permissions.")
 
 		const { role } = jwt.verify(token, JWT_SECRET) as IUserToken

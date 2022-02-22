@@ -18,6 +18,7 @@ class UserController {
 
 		async signIn(req: Request, res: Response) {
 			try {
+				
 				const { error } = signInValidation(req.body)
 				const user = await User.findOne({ email: req.body.email }).select('+password').exec();
 
@@ -29,7 +30,7 @@ class UserController {
 
 				const token = jwt.sign({ _id: user._id, role: user.role }, JWT_SECRET, { expiresIn: "2h" })
 
-				res.header('auth-token', token)
+				res.cookie('token', token, { maxAge: 60 * 60 * 24 * 7, httpOnly: true });
 
 				const { password, ...userPL } = user._doc
 				return res.json(userPL)
@@ -59,7 +60,7 @@ class UserController {
 					await userCreated.save()
 					
 					const token = jwt.sign({ _id: userCreated._id, role: userCreated.role }, JWT_SECRET, { expiresIn: "2h" })
-					res.header('auth-token', token)
+					res.cookie('token', token, { maxAge: 60 * 60 * 24 * 7, httpOnly: true });
 
 					const { password, ...userCreatedPL } = userCreated._doc
 					return res.json({ error, user: userCreatedPL  })
