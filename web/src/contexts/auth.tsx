@@ -1,35 +1,44 @@
 import React from 'react'
-import auth from 'services/auth';
+import auth from 'services/auth'
+import { ISignIn } from 'types/auth'
+import { IUSer } from 'types/user'
+import { notifyError } from 'utils/notifier'
 
 interface AuthContextType {
-  user: any;
-  signin: (user: string, callback: VoidFunction) => void;
-  signout: (callback: VoidFunction) => void;
+  user: Omit<IUSer, 'password'> | null
+	setUser: React.Dispatch<React.SetStateAction<Omit<IUSer, "password"> | null>>,
+  signin: (user: ISignIn, callback?: any, fallback?: any) => void
+  signout: (callback?: any) => void
 }
 
-export const AuthContext = React.createContext<AuthContextType>(null!);
+export const AuthContext = React.createContext<AuthContextType>(null!)
 
 interface Props {
 	children: React.ReactNode
 }
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [user, setUser] = React.useState<any>(null);
+  const [user, setUser] = React.useState<Omit<IUSer, 'password'> | null>(null);
 
-  const signin = (newUser: string, callback: VoidFunction) => {
-    return auth.signin(() => {
-      setUser(newUser);
-      callback();
-    });
+  const signin: AuthContextType['signin'] = (userSigningIn, callback, fallback) => {
+    auth.signin(userSigningIn)
+			.then((user) => {
+				localStorage.setItem('user', JSON.stringify(user))
+				setUser(user)
+				callback?.()
+			})
+			.catch(error => {
+				notifyError(error.request.response)
+				fallback?.()
+			})
   };
 
-  const signout = (callback: VoidFunction) => {
-    return auth.signout(() => {
-      setUser(null);
-      callback();
-    });
-  };
+  const signout = () => {
+		localStorage.removeItem('user')
+		setUser(null)
+    auth.signout()
+  }
 
-  const value = { user, signin, signout };
+  const value = { user, setUser, signin, signout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

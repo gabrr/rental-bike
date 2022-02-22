@@ -1,3 +1,13 @@
+import { Api } from "api"
+import { AxiosResponse } from "axios"
+import { ISignIn } from "types/auth";
+import { IUSer } from "types/user"
+
+
+export interface SignInResponse extends Omit<IUSer, 'password'> {
+	_id: string
+}
+
 class Auth {
   authenticated: boolean
 
@@ -5,14 +15,19 @@ class Auth {
     this.authenticated = false;
   }
 
-  signin(cb: any) {
-    this.authenticated = true;
-    cb();
+  async signin(user: ISignIn) {
+		try {
+			const response: AxiosResponse<SignInResponse> = await Api.post('user/signin', user)
+			this.authenticated = true
+			return response.data
+
+		} catch (error) {
+			throw error
+		}
   }
 
-  signout(cb: any) {
+  signout() {
     this.authenticated = false;
-    cb();
   }
 
   isAuthenticated() {

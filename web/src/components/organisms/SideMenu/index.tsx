@@ -3,7 +3,6 @@ import { useAuth } from 'hooks/auth'
 import { useSideMenu } from 'hooks/sideMenu'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import auth from 'services/auth'
 import styled from 'styled-components'
 
 export const SideMenu: React.FC = () => {
@@ -11,12 +10,12 @@ export const SideMenu: React.FC = () => {
 	const { isOpen, toggle } = useSideMenu()
 	const navigate = useNavigate()
 
-	const handleSignUp = () => auth.signout(signout)
-
 	const goAndCloseMenu = (path: string) => {
 		navigate(path)
 		toggle()
 	}
+
+	const handleSignUp = () => signout(goAndCloseMenu('/signin'))
 
 	const goToUsers = () => goAndCloseMenu('/users')
 	const goToBikes = () => goAndCloseMenu('/')
