@@ -1,5 +1,6 @@
 import { Api } from "api"
 import { AxiosResponse } from "axios"
+import { signUp as handleSignUp } from "services/user";
 import { ISignIn } from "types/auth";
 import { IUSer } from "types/user"
 
@@ -20,6 +21,17 @@ class Auth {
 			const response: AxiosResponse<SignInResponse> = await Api.post('user/signin', user)
 			this.authenticated = true
 			return response.data
+
+		} catch (error) {
+			throw error
+		}
+  }
+
+	async signup(newUser: Omit<IUSer, 'role'>) {
+		try {
+			const data = await handleSignUp(newUser)
+			this.authenticated = true
+			return data
 
 		} catch (error) {
 			throw error

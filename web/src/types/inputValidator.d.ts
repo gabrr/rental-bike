@@ -1,4 +1,4 @@
 export interface isInputValidProps {
-    type: 'email' | 'password'
+    type: 'email' | 'password' | 'name'
     value: string
 }

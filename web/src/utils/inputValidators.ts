@@ -10,12 +10,16 @@ export const isInputValid: (props: isInputValidProps) => boolean = ({ type, valu
         'password': (value: string) => {
             return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(value)
         },
+				'name': (value: string) => {
+					return value.length > 2
+				}
     }
 
     return validators[type](value)
 }
 
 export const INPUT_ERRORS = {
-    email: 'Enter a valid email',
-    password: 'Minimum eight characters, at least one letter, one number and one special character'
+    email: 'Enter a valid email.',
+    password: 'Minimum eight characters, at least one letter, one number and one special character.',
+		name: 'Your name, should be at least 2 chars.'
 }

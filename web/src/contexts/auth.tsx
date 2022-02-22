@@ -8,6 +8,7 @@ interface AuthContextType {
   user: Omit<IUSer, 'password'> | null
 	setUser: React.Dispatch<React.SetStateAction<Omit<IUSer, "password"> | null>>,
   signin: (user: ISignIn, callback?: any, fallback?: any) => void
+	signup: (newUser: Omit<IUSer, 'role'>, callback?: any, fallback?: any) => void
   signout: (callback?: any) => void
 }
 
@@ -30,6 +31,19 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 				notifyError(error.request.response)
 				fallback?.()
 			})
+  }
+
+	const signup: AuthContextType['signup'] = (newUser, callback, fallback) => {
+    auth.signup(newUser)
+			.then((user) => {
+				localStorage.setItem('user', JSON.stringify(user))
+				setUser(user)
+				callback?.()
+			})
+			.catch(error => {
+				notifyError(error.request.response)
+				fallback?.()
+			})
   };
 
   const signout = () => {
@@ -38,7 +52,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     auth.signout()
   }
 
-  const value = { user, setUser, signin, signout };
+  const value = { user, setUser, signin, signup, signout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
