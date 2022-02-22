@@ -7,7 +7,7 @@ interface Props {
 	hideReservator?: boolean
 	hideReserved?: boolean
 	reservations: {
-		id: string
+		_id: string
 		user?: string
 		bike?: string
 		startPeriod: Date,
@@ -31,13 +31,13 @@ export const ReservationList: React.FC<Props> = ({ reservations, hideReservator,
 				
 					{reservations.map((reservation) => {
 						return (
-							<div key={reservation.id} className="reservation">
+							<div key={reservation._id} className="reservation">
 								<div className="left">
 									{!hideReservator && <p className="reservator">{reservation.user}</p>}
 									{!hideReserved && <p className="bike_reserved">{reservation.bike}</p>}
 									<p className="period">{combineStartEndPeriod(reservation.startPeriod, reservation.endPeriod)}</p>
 								</div>
-								<button className="cancel_button" onClick={(e) => cancelReservation(e, reservation.id)}>
+								<button className="cancel_button" onClick={(e) => cancelReservation(e, reservation._id)}>
 									<Deleteicon fill={'var(--button-text-default)'} />
 								</button>
 

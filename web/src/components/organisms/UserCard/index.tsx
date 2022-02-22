@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router'
 
 interface Props {
 	user: {
-		id: string,
+		_id: string,
 		userName: string
 		email: string
 		reservations: {
-			id: string
+			_id: string
 			bike: string
 			startPeriod: Date,
 			endPeriod: Date,
@@ -25,7 +25,7 @@ export const UserCard: React.FC<Props> = ({ user }) => {
 
 	const toggleExpanded = () => setisExpanded(state => !state)
 
-	const goToEditUser = () => navigate(`/edit-user/${user.id}`)
+	const goToEditUser = () => navigate(`/edit-user/${user._id}`)
 
 	return (
 		<Div isExpanded={isExpanded} onClick={toggleExpanded}>

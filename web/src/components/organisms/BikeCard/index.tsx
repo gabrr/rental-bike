@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import ReactRating from 'react-rating'
+import DatetimeRangePicker from 'react-datetime-range-picker'
 
-import { Editicon, Pin, Star } from 'components/atoms'
+import { Button, Editicon, Pin, Star } from 'components/atoms'
 import { IBike } from 'types'
 import { popping } from 'animations'
 import { useNavigate } from 'react-router'
@@ -15,7 +16,7 @@ interface Props {
 
 export const BikeCard: React.FC<Props> = ({ bike }) => {
 	const [isExpanded, setisExpanded] = useState(false)
-	
+		
 	const navigate = useNavigate()
 
 	const toggleExpanded = () => setisExpanded(state => !state)
@@ -24,11 +25,13 @@ export const BikeCard: React.FC<Props> = ({ bike }) => {
 	
 	const isAvailable = !!bike.reservations.length
 
+	const isAdmin = false
+
 	return (
 		<Div isAvailable={isAvailable} isExpanded={isExpanded} onClick={toggleExpanded}>
-			<button className="edit_button" onClick={goToEditBike}>
+			{isAdmin && <button className="edit_button" onClick={goToEditBike}>
 				<Editicon />
-			</button>
+			</button>}
 
 			<div className="card_display">
 				<div className="card_left">
@@ -44,6 +47,13 @@ export const BikeCard: React.FC<Props> = ({ bike }) => {
 					</div>
 					<ReactRating emptySymbol={<Star />} fullSymbol={<Star isFull />} />
 				</div>
+			</div>
+
+			<div className="reserve_action" onClick={(e: React.MouseEvent<HTMLDivElement>) => {e.stopPropagation()}}>
+				<DatetimeRangePicker />
+				<Button buttonPurpose='default' isLoading={false}>
+					Reserve
+				</Button>
 			</div>
 
 			<ReservationList reservations={bike.reservations} />
@@ -126,4 +136,9 @@ const Div = styled.div<{ isAvailable: boolean, isExpanded: boolean }>`
 		}
 	}
 
+	.reserve_action {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 3rem;
+	}
 `

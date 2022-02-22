@@ -9,7 +9,7 @@ export const Users = () => {
 	return (
 		<HomeLists hideFilter role='admin' tab='Users'>
 			<Div>
-				{users.map((user) => <UserCard key={user.id} user={user} />)}
+				{users.map((user) => <UserCard key={user._id} user={user} />)}
 			</Div>
 		</HomeLists>
 	)

@@ -14,5 +14,5 @@ export const updateItem = (item: IBike) => ({
 
 export const deleteItem = (id: string) => ({
     type: REMOVE_ITEM,
-    payload: { item: { id } as IBike }
+    payload: { item: { _id: id } }
 })

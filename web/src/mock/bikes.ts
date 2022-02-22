@@ -10,7 +10,7 @@ import _ from 'lodash'
 
 export const bikes: IBike[] = [
 	{
-		id: "Bike z1",
+		_id: "Bike z1",
 		name: 'Bike z1',
 		model: 'z',
 		color: 'blue',
@@ -18,19 +18,19 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
-				id: _.uniqueId(),
+				_id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
 			},
 			{
-				id: _.uniqueId(),
+				_id: _.uniqueId(),
 				userId: "hhjnvjkj",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
 			},
 			{
-				id: _.uniqueId(),
+				_id: _.uniqueId(),
 				userId: "dfyguhjbh",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
@@ -38,7 +38,7 @@ export const bikes: IBike[] = [
 		]
 	},
 	{
-		id: "Bike a1",
+		_id: "Bike a1",
 		name: 'Bike a1',
 		model: 'a',
 		color: 'blue',
@@ -46,7 +46,7 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
-				id: _.uniqueId(),
+				_id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
@@ -54,7 +54,7 @@ export const bikes: IBike[] = [
 		]
 	},
 	{
-		id: "Bike a2",
+		_id: "Bike a2",
 		name: 'Bike a2',
 		model: 'a',
 		color: 'yellow',
@@ -62,7 +62,7 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
-				id: _.uniqueId(),
+				_id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
@@ -70,7 +70,7 @@ export const bikes: IBike[] = [
 		]
 	},
 	{
-		id: "Bike a3",
+		_id: "Bike a3",
 		name: 'Bike a3',
 		model: 'a',
 		color: 'blue',
@@ -78,7 +78,7 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
-				id: _.uniqueId(),
+				_id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
@@ -86,7 +86,7 @@ export const bikes: IBike[] = [
 		]
 	},
 	{
-		id: "Bike k1",
+		_id: "Bike k1",
 		name: 'Bike k1',
 		model: 'k',
 		color: 'blue',
@@ -94,7 +94,7 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
-				id: _.uniqueId(),
+				_id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),
@@ -102,7 +102,7 @@ export const bikes: IBike[] = [
 		]
 	},
 	{
-		id: "Bike k2",
+		_id: "Bike k2",
 		name: 'Bike k2',
 		model: 'k',
 		color: 'pink',
@@ -110,7 +110,7 @@ export const bikes: IBike[] = [
 		address: 'Centro, Florianópolis',
 		reservations: [
 			{
-				id: _.uniqueId(),
+				_id: _.uniqueId(),
 				userId: "userIdname",
 				startPeriod: new Date(),
 				endPeriod: new Date(),

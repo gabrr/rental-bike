@@ -1,17 +1,17 @@
 export const users = [
 	{
-		id: 'fghjkl',
+		_id: 'fghjkl',
 		userName: 'Gabriel Oliveira',
 		email: 'g.webdeveloper@gmail.com',
 		reservations: [
 			{
-				id: 'fghjkljjh',
+				_id: 'fghjkljjh',
 				bike: 'Bike Z2',
 				startPeriod: new Date(),
 				endPeriod: new Date(),
 			},
 			{
-				id: 'dtyumncfgh',
+				_id: 'dtyumncfgh',
 				bike: 'Bike Z2',
 				startPeriod: new Date(),
 				endPeriod: new Date(),
@@ -19,18 +19,18 @@ export const users = [
 		]
 	},
 	{
-		id: 'gbjnhb',
+		_id: 'gbjnhb',
 		userName: 'Peter Gregory',
 		email: 'g.webdeveloper@gmail.com',
 		reservations: [
 			{
-				id: 'nbhjn',
+				_id: 'nbhjn',
 				bike: 'Z2',
 				startPeriod: new Date(),
 				endPeriod: new Date(),
 			},
 			{
-				id: 'iuytrfgbn',
+				_id: 'iuytrfgbn',
 				bike: 'Z2',
 				startPeriod: new Date(),
 				endPeriod: new Date(),
@@ -38,18 +38,18 @@ export const users = [
 		]
 	},
 	{
-		id: 'fgyhbh',
+		_id: 'fgyhbh',
 		userName: 'Jennie Super',
 		email: 'g.webdeveloper@gmail.com',
 		reservations: [
 			{
-				id: 'gvhjnb',
+				_id: 'gvhjnb',
 				bike: 'Z2',
 				startPeriod: new Date(),
 				endPeriod: new Date(),
 			},
 			{
-				id: 'gjbjkb',
+				_id: 'gjbjkb',
 				bike: 'Z2',
 				startPeriod: new Date(),
 				endPeriod: new Date(),

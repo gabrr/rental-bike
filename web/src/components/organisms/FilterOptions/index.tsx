@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import DatetimeRangePicker from 'react-datetime-range-picker';
+import DatetimeRangePicker from 'react-datetime-range-picker'
 import { Star } from 'components/atoms'
-import { ColorsOptions } from 'components/molecules';
+import { ColorsOptions } from 'components/molecules'
 import ReactRating from 'react-rating'
-import { useFilter } from 'hooks/filter';
+import { useFilter } from 'hooks/filter'
 
 export const FilterOptions: React.FC = () => {
 
@@ -56,13 +56,13 @@ const Div = styled.div`
 	position: fixed;
 	bottom: 0;
 	width: 90%;
-	height: 50vh;
+	height: clamp(370px, 60vh, 400px);
 	padding: 1.2rem 5%;
 	background-color: var(--background-color);
 	border-top-left-radius: 30px;
 	border-top-right-radius: 30px;
 	box-shadow: 0px -10px 24px 0px rgba(0, 0, 0, 0.08);
-	transform: translateY(60vh);
+	transform: translateY(70vh);
 	transition: transform 300ms ease-in-out;
 
 	&.opened {
