@@ -53,6 +53,7 @@ class UserController {
 					
 					const newUser = {
 						...req.body,
+						role: 'user',
 						password: hashedPassword
 					}
 
@@ -63,7 +64,7 @@ class UserController {
 					res.cookie('token', token, { maxAge: 60 * 60 * 24 * 7, httpOnly: true });
 
 					const { password, ...userCreatedPL } = userCreated._doc
-					return res.json({ error, user: userCreatedPL  })
+					return res.json(userCreatedPL)
             
         } catch (error: any) {
             return res.status(400).json(error.message)
