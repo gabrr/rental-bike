@@ -19,7 +19,8 @@ routes.post('/api/user/create-user', adminRoute, userController.createUser)
 // Bikes
 routes.get('/api/bike', protectedRoute, bikeController.index)
 routes.delete('/api/bike/delete-bike/:bikeId', adminRoute, bikeController.deleteBike)
-routes.patch('/api/bike/edit-bike/:bikeId', adminRoute, bikeController.editBike)
+routes.patch('/api/bike/edit-bike/:bikeId', protectedRoute, bikeController.editBike)
+routes.post('/api/bike/image', adminRoute, bikeController.upload.single('image'), bikeController.imageUploader)
 routes.post('/api/bike/create-bike', adminRoute, bikeController.createBike)
 
 // Reservations
