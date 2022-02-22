@@ -16,13 +16,13 @@ export const listReducer = (state = INITIAL_STATE, action: IAction) => {
             return [...state, action.payload.item]
 
         case UPDATE_ITEM:
-            const id = action.payload.item.id
-            const newState = state.map(item => (item.id === id) ? action.payload.item : item)
+            const id = action.payload.item._id
+            const newState = state.map(item => (item._id === id) ? action.payload.item : item)
             return newState
 
         case REMOVE_ITEM:
-            const idToRemove = action.payload.item.id
-            const stateWithItemRemoved = state.filter(item => item.id !== idToRemove)
+            const idToRemove = action.payload.item._id
+            const stateWithItemRemoved = state.filter(item => item._id !== idToRemove)
             return stateWithItemRemoved
 
         default:

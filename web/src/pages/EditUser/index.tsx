@@ -10,6 +10,12 @@ export const EditUser = () => {
 			<Div>
 				<form onSubmit={() => {}}>
 					<Input className='inputs' placeholder='Name' />
+					
+					<select name="role" id="role">
+						<option value="">Select a role</option>
+						<option value="admin">Admin</option>
+						<option value="user">User</option>
+					</select>
 				</form>
 
 				<div className="actions">
@@ -46,5 +52,14 @@ const Div = styled.div`
 		width: max-content;
 		padding: 10px 30px;
 		margin: 20px 0;
+	}
+
+	#role {
+		width: 100%;
+		padding: 10px 0;
+		border: none;
+		background-color: var(--input-background);
+		color: var(--primary-text);
+		border-radius: var(--border-radius);
 	}
 `

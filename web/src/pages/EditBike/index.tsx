@@ -14,7 +14,7 @@ export const EditBike = () => {
 
 	const reservations = [
 		{
-			id: 'hjbkn',
+			_id: 'hjbkn',
 			user: 'Gabriel Oliveira',
 			bike: 'Z2',
 			startPeriod: new Date(),

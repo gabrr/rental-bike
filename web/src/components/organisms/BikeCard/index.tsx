@@ -21,7 +21,7 @@ export const BikeCard: React.FC<Props> = ({ bike }) => {
 
 	const toggleExpanded = () => setisExpanded(state => !state)
 
-	const goToEditBike = () => navigate(`/edit-bike/${bike.id}`)
+	const goToEditBike = () => navigate(`/edit-bike/${bike._id}`)
 	
 	const isAvailable = !!bike.reservations.length
 
