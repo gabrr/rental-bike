@@ -19,7 +19,7 @@ class UserController {
 		async signIn(req: Request, res: Response) {
 			try {
 				const { error } = signInValidation(req.body)
-				const user = await User.findOne({ email: req.body.email })
+				const user = await User.findOne({ email: req.body.email }).select('+password').exec();
 
 				if (error) throw Error(error.details[0].message)
 				if (!user) throw Error('E-mail or password invalid.')
@@ -30,7 +30,9 @@ class UserController {
 				const token = jwt.sign({ _id: user._id, role: user.role }, JWT_SECRET, { expiresIn: "2h" })
 
 				res.header('auth-token', token)
-				return res.json(user)
+
+				const { password, ...userPL } = user._doc
+				return res.json(userPL)
 
 			} catch (error: any) {
 				return res.status(400).json(error.message)

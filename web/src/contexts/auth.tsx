@@ -13,7 +13,7 @@ interface Props {
 	children: React.ReactNode
 }
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [user, setUser] = React.useState<any>({});
+  const [user, setUser] = React.useState<any>(null);
 
   const signin = (newUser: string, callback: VoidFunction) => {
     return auth.signin(() => {
