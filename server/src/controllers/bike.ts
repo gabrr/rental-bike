@@ -101,10 +101,10 @@ class BikeController {
 
 				const { _id } = jwt.verify(token, JWT_SECRET) as IUserToken
 
-				const rating = {
+				const rating = [{
 					userId: _id,
 					rate: rateGiven
-				}
+				}]
 
 				const newBike = await Bike.findByIdAndUpdate(bikeId, { rating }, { new: true })
 				return res.json(newBike)
