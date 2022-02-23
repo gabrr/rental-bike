@@ -9,7 +9,7 @@ import reservationController from 'controllers/reservation'
 const routes = express.Router()
 
 // Users and Authentication
-routes.get('/api/user/users', adminRoute, userController.index)
+routes.get('/api/user/users', protectedRoute, userController.index)
 routes.post('/api/user/signin', userController.signIn)
 routes.post('/api/user/signup', userController.signUp)
 routes.delete('/api/user/delete-user/:userId', adminRoute, userController.deleteUser)
@@ -26,7 +26,7 @@ routes.post('/api/bike/create-bike', adminRoute, bikeController.createBike)
 // Reservations
 routes.get('/api/reservation', adminRoute, reservationController.index)
 routes.get('/api/reservation/user/:userId', protectedRoute, reservationController.userReservations)
-routes.get('/api/reservation/bike/:bikeId', adminRoute, reservationController.bikeReservations)
+routes.get('/api/reservation/bike/:bikeId', protectedRoute, reservationController.bikeReservations)
 routes.delete('/api/reservation/delete-reservation/:reservationId', protectedRoute, reservationController.deleteReservation)
 routes.patch('/api/reservation/edit-reservation/:reservationId', protectedRoute, reservationController.editReservation)
 routes.post('/api/reservation/create-reservation', protectedRoute, reservationController.createReservation)

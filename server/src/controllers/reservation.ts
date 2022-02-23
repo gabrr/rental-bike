@@ -1,6 +1,9 @@
+import jwt from 'jsonwebtoken';
 import Reservation from 'models/Reservation'
 import { Request, Response } from 'express'
 import { createReservationValidation, editReservationValidation } from 'utils/validation'
+import { JWT_SECRET } from 'config/env';
+import { IUserToken } from 'types/jwt';
 
 class ReservationController {
     async index(req: Request, res: Response ) {
@@ -71,6 +74,13 @@ class ReservationController {
 		async bikeReservations(req: Request, res: Response) {
 			try {
 				const bikeId = req.params.bikeId
+				const token = req.cookies.token || ''
+				const { role, _id } = jwt.verify(token, JWT_SECRET) as IUserToken
+
+				if (role === 'user') {
+					const reservations = await Reservation.find({ bikeId, userId: _id })
+					return res.json(reservations)	
+				}
 
 				const reservations = await Reservation.find({ bikeId })
 				return res.json(reservations)

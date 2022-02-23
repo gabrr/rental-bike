@@ -4,16 +4,25 @@ import { Request, Response } from 'express'
 import { JWT_SECRET } from 'config/env'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { IUserToken } from 'types/jwt'
 
 class UserController {
     async index(req: Request, res: Response ) {
-        try {
-					const users = await User.find()
-           return res.json(users)
+			try {
+				const token = req.cookies.token || ''
+				const { role, _id } = jwt.verify(token, JWT_SECRET) as IUserToken
 
-        } catch (error: any) {
-					return res.status(400).json(error.message)
-        }
+				if (role === 'user') {
+					const user = await User.findOne({ _id })
+					return res.json([user])	
+				}
+
+				const users = await User.find()
+				return res.json(users)
+
+			} catch (error: any) {
+				return res.status(400).json(error.message)
+			}
     }
 
 		async signIn(req: Request, res: Response) {
