@@ -33,7 +33,7 @@ class ReservationController {
 				const newReservation = await new Reservation(req.body)
 				newReservation.save()
 
-				return res.json({ reservation: newReservation })
+				return res.json(newReservation)
 
 			} catch (error: any) {
 				return res.json(error.message)
@@ -61,7 +61,7 @@ class ReservationController {
 				const userId = req.params.userId
 				
 				const reservations = await Reservation.find({ userId })
-				return res.json({ reservations })
+				return res.json(reservations)
 				
 			} catch (error: any) {
 				return res.json(error.message)
@@ -73,7 +73,7 @@ class ReservationController {
 				const bikeId = req.params.bikeId
 
 				const reservations = await Reservation.find({ bikeId })
-				return res.json({ reservations })
+				return res.json(reservations)
 				
 			} catch (error: any) {
 				return res.json(error.message)
