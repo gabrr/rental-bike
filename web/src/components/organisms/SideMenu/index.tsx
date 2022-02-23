@@ -1,5 +1,6 @@
 import { LinkButton } from 'components/atoms'
 import { useAuth } from 'hooks/auth'
+import { useFilter } from 'hooks/filter'
 import { useSideMenu } from 'hooks/sideMenu'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
@@ -8,11 +9,13 @@ import styled from 'styled-components'
 export const SideMenu: React.FC = () => {
 	const { signout, user } = useAuth()
 	const { isOpen, toggle } = useSideMenu()
+	const { toggle: toggleFilter, isOpen: isFilterOpen } = useFilter()
 	const navigate = useNavigate()
 
 	const goAndCloseMenu = (path: string) => {
 		navigate(path)
 		toggle()
+		if (isFilterOpen) toggleFilter()
 	}
 
 	const handleSignUp = () => signout(goAndCloseMenu('/signin'))

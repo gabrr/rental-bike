@@ -1,22 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
-export const ColorsOptions = () => {
+interface Props {
+	onChange: (value: string) => void
+	value: string
+}
+
+export const ColorsOptions: React.FC<Props> = ({ onChange, value = "black" }) => {
+
+	const [colorKey, setcolorKey] = useState<string>(value)
 
 	const COLORS = {
 		"black": "#1e1c1a",
-		"pink": "#e80066",
-		"blue": "#017acb",
-		"yellow": "#f2f97e",
+		"pink": "#fe00ff",
+		"blue": "#0040ff",
+		"yellow": "#f8f311",
+		"red": "#fe0202",
+		"green": "#3ed80e",
 	}
 
-	const SELECTED_COLOR = "blue"
+	const handleColorChange = (valueChanged: string) => {
+		onChange(valueChanged)
+		setcolorKey(valueChanged)
+	}
 
 	return (
 		<Div>
 			{Object.entries(COLORS).map(([colorName, colorHash]) => {
 				return (
-					<ColorCircle colorHash={colorHash} key={colorHash} className={(SELECTED_COLOR === colorName) ? "selected" : ""}>
+					<ColorCircle
+						onClick={() => handleColorChange(colorName)}
+						colorHash={colorHash}
+						key={colorHash}
+						className={(colorKey === colorName) ? "selected" : ""}
+					>
 					</ColorCircle >
 				)
 			})}
@@ -31,8 +48,36 @@ const Div = styled.div`
 `
 
 const ColorCircle = styled.div<{ colorHash: string }>`
-	height: 30px;
-	width: 30px;
+	height: 27px;
+	width: 27px;
 	border-radius: 100%;
 	background-color: ${({ colorHash }) => colorHash};
+	position: relative;
+	
+
+	&::after {
+		content: "";
+		transition: transform 300ms ease-in-out;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		transform: translate(-50%, -50%) scale(1);
+		transform-origin: center;
+		left: 50%;
+		top: 50%;
+		border-radius: 100%;
+		border: 2px solid transparent;
+	}
+
+	&.selected::after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		transform: translate(-50%, -50%) scale(1.2);
+		left: 50%;
+		top: 50%;
+		border-radius: 100%;
+		border: 2px solid ${({ colorHash }) => colorHash};
+	}
 `

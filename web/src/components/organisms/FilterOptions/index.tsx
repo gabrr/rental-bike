@@ -14,11 +14,13 @@ export const FilterOptions: React.FC = () => {
 		"Centro, Florianópolis",
 		"Agronômica, Florianópolis",
 		"Trindade, Florianópolis",
+		"Carianos, Florianópolis",
+		"Praia dos Ingleses",
+		"Juerê Internacional",
 	]
 
-
 	return (
-		<Div className={isOpen ? "opened" : ""}>
+		<Div id="filter_options" className={isOpen ? "opened" : ""}>
 			<h1 className="title">
 				Filters
 			</h1>
@@ -29,7 +31,7 @@ export const FilterOptions: React.FC = () => {
 
 			<section>
 				<p className="label">Color</p>
-				<ColorsOptions />
+				<ColorsOptions onChange={() => {}} value={"pink"} />
 			</section>
 
 			<section>
@@ -56,7 +58,7 @@ const Div = styled.div`
 	position: fixed;
 	bottom: 0;
 	width: 90%;
-	height: clamp(370px, 60vh, 400px);
+	height: clamp(370px, 66vh, 450px);
 	padding: 1.2rem 5%;
 	background-color: var(--background-color);
 	border-top-left-radius: 30px;
@@ -78,6 +80,15 @@ const Div = styled.div`
 			font-size: 1.5rem;
 			color: var(--primary-text);
 			font-weight: 600;
+		}
+
+		.rdt input {
+			background-color: var(--input-background) !important;
+			border: none !important;
+			border-radius: var(--border-radius);
+			padding: 10px 20px;
+			color: var(--primary-text);
+			margin: 0.5rem 0;
 		}
 	}
 
