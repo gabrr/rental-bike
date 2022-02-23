@@ -25,6 +25,7 @@ const Div = styled.div`
 		padding: 5px 10px;
 		background-color: var(--input-background);
 		border-radius: var(--border-radius);
+		color: var(--primary-text);
 	}
 
 	p {

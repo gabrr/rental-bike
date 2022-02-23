@@ -1,3 +1,4 @@
+import { COLORS } from 'mock/assistence'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -9,15 +10,6 @@ interface Props {
 export const ColorsOptions: React.FC<Props> = ({ onChange, value = "black" }) => {
 
 	const [colorKey, setcolorKey] = useState<string>(value)
-
-	const COLORS = {
-		"black": "#1e1c1a",
-		"pink": "#fe00ff",
-		"blue": "#0040ff",
-		"yellow": "#f8f311",
-		"red": "#fe0202",
-		"green": "#3ed80e",
-	}
 
 	const handleColorChange = (valueChanged: string) => {
 		onChange(valueChanged)

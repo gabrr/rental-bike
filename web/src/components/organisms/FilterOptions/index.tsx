@@ -5,19 +5,11 @@ import { Star } from 'components/atoms'
 import { ColorsOptions } from 'components/molecules'
 import ReactRating from 'react-rating'
 import { useFilter } from 'hooks/filter'
+import { LOCATIONS } from 'mock/assistence'
 
 export const FilterOptions: React.FC = () => {
 
 	const { isOpen } = useFilter()
-
-	const locations = [
-		"Centro, Florianópolis",
-		"Agronômica, Florianópolis",
-		"Trindade, Florianópolis",
-		"Carianos, Florianópolis",
-		"Praia dos Ingleses",
-		"Juerê Internacional",
-	]
 
 	return (
 		<Div id="filter_options" className={isOpen ? "opened" : ""}>
@@ -43,7 +35,7 @@ export const FilterOptions: React.FC = () => {
 				<p className="label">Location</p>
 				<select name="locations" id="locations">
 					<option value="">Select a location</option>
-					{locations.map((location, index) => {
+					{LOCATIONS.map((location, index) => {
 						return (
 							<option key={"location " + index} value={location}>{location}</option>
 						)
