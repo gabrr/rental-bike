@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateBikes } from 'store/bikes/actions'
-import { IBike, IBikeResponse } from 'types/bike'
+import { IBike } from 'types/bike'
 
 interface FilterContextType {
   isOpen: boolean
@@ -33,30 +33,38 @@ export const FilterProvider: React.FC<Props> = ({ children }) => {
 	useEffect(() => {
 		const { addressF, colorF, modelF, timeFrame } = filterOptions
 
-		const filteredBikes = allBikes.filter(({ address, color, model, reservations }) => {
-			if (!!addressF && addressF !== address) return false
-			if (!!colorF && colorF !== color) return false
-			if (!!modelF && modelF !== model) return false
-
-			if (!timeFrame?.startPeriod || !timeFrame?.endPeriod) return true
-			// Refers to wether it has reservation within the time frame filtered.
-			reservations.forEach(reservation => {
-				const start = Date.parse(reservation.startPeriod)
-				const end = Date.parse(reservation.endPeriod)
-
-				const filterStart = Date.parse(timeFrame.startPeriod)
-				const filterEnd = Date.parse(timeFrame.endPeriod)
-
-				if (start < filterStart && end > filterEnd) return false
-
-				if (start > filterStart && end < filterEnd) return false				
-
+		const filterBikes = () => {
+			return allBikes.filter(({ address, color, model, reservations }) => {
+				let result = true
+				
+				if (!!addressF && addressF !== address) return false
+				if (!!colorF && colorF !== color) return false
+				if (!!modelF && modelF !== model) return false
+		
+				if (!timeFrame?.startPeriod || !timeFrame?.endPeriod) return true
+		
+				
+				// Refers to wether it has reservation within the time frame filtered.
+				reservations.forEach(reservation => {
+					const start = Date.parse(reservation.startPeriod)
+					const end = Date.parse(reservation.endPeriod)
+		
+					const filterStart = Date.parse(timeFrame.startPeriod)
+					const filterEnd = Date.parse(timeFrame.endPeriod)
+		
+					if (start <= filterStart && end >= filterEnd) result = false
+		
+					if (start >= filterStart && end <= filterEnd) result = false				
+		
+				})
+				
+				return result
 			})
-			
-			return true
-		})
+		}
 
-		updateBikes(dispatch, filteredBikes)
+		const result = filterBikes()
+
+		updateBikes(dispatch, result)
 
 	}, [filterOptions])
 

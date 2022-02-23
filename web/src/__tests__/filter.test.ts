@@ -2,7 +2,7 @@ import { allBikes } from './../mock/bikes';
 import { BIKE_MODELS, LOCATIONS } from "../mock/assistence"
 import { IAllBikes } from "../mock/bikes"
 
-const filteredBikes = (allBikes: IAllBikes[], { addressF, colorF, modelF, timeFrame  }: any) => {
+const filterBikes = (allBikes: IAllBikes[], { addressF, colorF, modelF, timeFrame  }: any) => {
 	return allBikes.filter(({ address, color, model, reservations }) => {
 		let result = true
 		
@@ -46,7 +46,7 @@ test("Test filtering data", () => {
 		endPeriod: new Date("2022/03/01").toISOString()
 	}
 
-	const result = filteredBikes(allBikes, { addressF, colorF, modelF, timeFrame })
+	const result = filterBikes(allBikes, { addressF, colorF, modelF, timeFrame })
 
 	expect(result).toBeInstanceOf(Array)
 	
@@ -59,7 +59,7 @@ test("Return all elements if no filter passed", () => {
 	const modelF = undefined
 	const timeFrame = {}
 
-	const result = filteredBikes(allBikes, { addressF, colorF, modelF, timeFrame })
+	const result = filterBikes(allBikes, { addressF, colorF, modelF, timeFrame })
 
 	expect(result).toBeInstanceOf(Array)
 	
@@ -76,7 +76,7 @@ test("Test second reservation of the bike timeframe, if it overlaps it shouldn't
 		endPeriod: new Date("2022/07/10").toISOString(),
 	}
 
-	const result = filteredBikes(allBikes, { addressF, colorF, modelF, timeFrame })
+	const result = filterBikes(allBikes, { addressF, colorF, modelF, timeFrame })
 
 	expect(result).toBeInstanceOf(Array)
 	
@@ -90,7 +90,7 @@ test("Testing one filter option", () => {
 
 	const timeFrame = {}
 
-	const result = filteredBikes(allBikes, { addressF, colorF, modelF, timeFrame })
+	const result = filterBikes(allBikes, { addressF, colorF, modelF, timeFrame })
 	expect(result).toHaveLength(1)
 	expect(result[0].address).toBe(LOCATIONS[2])
 })
@@ -102,7 +102,7 @@ test("Testing multiple filter options", () => {
 
 	const timeFrame = {}
 
-	const result = filteredBikes(allBikes, { addressF, colorF, modelF, timeFrame })
+	const result = filterBikes(allBikes, { addressF, colorF, modelF, timeFrame })
 	expect(result).toHaveLength(2)
 })
 
