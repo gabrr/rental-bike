@@ -1,9 +1,9 @@
 import { Dispatch } from 'redux';
 import { getAllBikes } from 'services/bike';
 import { getReservationByBike } from 'services/reservation';
+import { IBikeResponse } from 'types/bike';
 import { notifyError } from 'utils/notifier';
 import { UPDATE_BIKES } from './constants';
-
 
 export const getBikes = (dispatch: Dispatch) => {
 
@@ -17,11 +17,14 @@ export const getBikes = (dispatch: Dispatch) => {
 					reservations
 				})
 			})		
-	
-			dispatch({ 
-				type: UPDATE_BIKES,
-				payload: { bikes: await Promise.all(bikesWithReservations) }
-			})
+			updateBikes(dispatch, await Promise.all(bikesWithReservations))
 		})
 		.catch(error => notifyError(error.request.response))
+}
+
+export const updateBikes = (dispatch: Dispatch, bikes: IBikeResponse[]) => {
+	dispatch({
+		type: UPDATE_BIKES,
+		payload: { bikes }
+	})
 }
