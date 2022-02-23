@@ -27,7 +27,9 @@ export const CreateEdit: React.FC<Props> = ({ title, role, children }) => {
 				</div>
 			</div>
 
-			{children}
+			<div className="container">
+				{children}
+			</div>
 
 			<SideMenu />	
 		</Div>
@@ -36,6 +38,11 @@ export const CreateEdit: React.FC<Props> = ({ title, role, children }) => {
 
 const Div = styled.div`
 	width: 100%;
+
+	.container {
+		max-width: 550px;
+		margin: auto;
+	}
 	
 	.header {
 		width: 90%;

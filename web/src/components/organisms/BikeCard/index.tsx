@@ -97,7 +97,7 @@ export const BikeCard: React.FC<Props> = ({ bike, user }) => {
 					<ReactRating
 						emptySymbol={<Star />}
 						fullSymbol={<Star isFull />}
-						onChange={handleRating}
+						onClick={handleRating}
 						initialRating={bikeRateAverage(bike)}
 					/>
 				</div>
@@ -136,6 +136,15 @@ const Div = styled.div<{ isAvailable: boolean, isExpanded: boolean }>`
 	filter: ${({ isAvailable }) => !isAvailable ? 'grayscale(0)' : 'grayscale(1)'};
 	opacity:${({ isAvailable }) => !isAvailable ? '1' : '0.3'};
 	pointer-events: ${({ isAvailable }) => !isAvailable ? 'all' : 'none'};
+
+	@media screen and (min-width: 850px) {
+		height: ${({ isExpanded }) => isExpanded ? '300px' : '130px'};
+
+		img {
+			margin-top: 4rem;
+    	margin-right: auto;
+		}
+	}
 
 	.card_display {
 		display: flex;

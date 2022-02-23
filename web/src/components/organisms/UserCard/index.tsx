@@ -47,7 +47,8 @@ export const UserCard: React.FC<Props> = ({ user }) => {
 }
 
 const Div = styled.div<{ isExpanded: boolean }>`
-	width: calc(100% - 4rem);
+	width: calc(90% - 4rem);
+	margin: auto;
 	padding: 1rem 2rem;
 	height: ${({ isExpanded }) => isExpanded ? '260px' : '30px'};
 	overflow: ${({ isExpanded }) => isExpanded ? 'scroll' : 'hidden'};
@@ -57,6 +58,10 @@ const Div = styled.div<{ isExpanded: boolean }>`
 	box-shadow: 5px 5px 17px 0px rgba(0, 0, 0, 0.12);
 	user-select: none;
 	cursor: pointer;
+
+	@media screen and (min-width: 850px){
+		width: calc(90% - 8rem);
+	}
 
 	.card_header {
 		display: flex;

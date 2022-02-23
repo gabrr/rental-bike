@@ -34,7 +34,7 @@ export const HomeLists: React.FC<Props> = ({ role, tab, hideFilter, children }) 
 				</div>
 			</div>
 
-			<div className="list">
+			<div className="home_list">
 				{children}
 			</div>
 
@@ -82,9 +82,16 @@ const Div = styled.div`
 		gap: 2rem;
 	}
 
-	.list {
+	.home_list {
 		display: flex;
 		flex-direction: column;
 		gap: 1.7rem;
+
+		@media screen and (min-width: 850px) {
+			width: 100%;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+    	margin: auto;
+		}
 	}
 `
