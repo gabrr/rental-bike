@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { Button, Input, LinkButton } from 'components/atoms'
 import { SignInUp } from 'components/templates'
 import { useNavigate } from 'react-router'
-import { INPUT_ERRORS, isInputValid } from 'utils'
+import { callInLine, INPUT_ERRORS, isInputValid } from 'utils'
 import { useAuth } from 'hooks/auth'
+import { notifyError } from 'utils/notifier'
 
 interface IForm {
 	email: string
@@ -20,7 +21,7 @@ export const SignUp = () => {
 
 	const createUser = (e: React.FormEvent) => {
 		e.preventDefault()
-		signup(form, () => navigate('/'), () => setisLoading(false))
+		signup(form, () => navigate('/'), () => callInLine(() => setisLoading(false), () => notifyError('Error to sign up.')))
 	}
 	
 	const goToSignIn = () => navigate('/signin')
