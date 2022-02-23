@@ -31,6 +31,18 @@ export const editUserValidation = (body: any) => {
 	return schema.validate(body)
 }
 
+export const createUserValidation = (body: any) => {
+	
+	const schema = Joi.object({
+		name: Joi.string().min(2).required(),
+		email: Joi.string().email().required(),
+		password: Joi.string().min(6),
+		role: Joi.string().valid('admin', 'user')
+	})
+
+	return schema.validate(body)
+}
+
 export const createBikeValidation = (body: any) => {
 	
 	const schema = Joi.object({

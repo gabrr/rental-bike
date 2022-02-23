@@ -1,5 +1,5 @@
 import User from 'models/User'
-import { signUpValidation, signInValidation, editUserValidation } from 'utils/validation'
+import { signUpValidation, signInValidation, editUserValidation, createUserValidation } from 'utils/validation'
 import { Request, Response } from 'express'
 import { JWT_SECRET } from 'config/env'
 import bcrypt from 'bcrypt'
@@ -103,7 +103,7 @@ class UserController {
 			try {
 				const isEmailExisting = await User.findOne({ email: req.body.email })
 
-				const { error } = signUpValidation(req.body)
+				const { error } = createUserValidation(req.body)
 
 				if (error) throw Error(error.details[0].message)
 				if (isEmailExisting) throw Error('E-mail unavailable.')
