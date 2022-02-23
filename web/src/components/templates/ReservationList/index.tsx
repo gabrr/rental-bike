@@ -1,24 +1,27 @@
-import { Deleteicon } from 'components/atoms'
 import React from 'react'
+import { Deleteicon } from 'components/atoms'
 import styled from 'styled-components'
+import { IBikeResponse } from 'types/bike'
+import { IReservationResponse } from 'types/reservation'
+import { IUserResponse } from 'types/user'
 import { combineStartEndPeriod } from 'utils'
 
 interface Props {
 	hideReservator?: boolean
 	hideReserved?: boolean
-	reservations?: {
-		_id: string
-		user?: string
-		bike?: string
-		startPeriod: Date,
-		endPeriod: Date,
-	}[]
+	reservations?: IReservationResponse[]
+	user?: IUserResponse,
+	bike?: IBikeResponse
 }
 
-export const ReservationList: React.FC<Props> = ({ reservations, hideReservator, hideReserved }) => {
+export const ReservationList: React.FC<Props> = ({ reservations, hideReservator, hideReserved, bike, user }) => {
 
 	const cancelReservation = (e: React.MouseEvent, id: string) => {
 		e.stopPropagation()
+	}	
+
+	const combineDates = (string: string, string2: string) => {
+		return combineStartEndPeriod(new Date(string), new Date(string2))
 	}
 
 	return (
@@ -33,9 +36,9 @@ export const ReservationList: React.FC<Props> = ({ reservations, hideReservator,
 						return (
 							<div key={reservation._id} className="reservation">
 								<div className="left">
-									{!hideReservator && <p className="reservator">{reservation.user}</p>}
-									{!hideReserved && <p className="bike_reserved">{reservation.bike}</p>}
-									<p className="period">{combineStartEndPeriod(reservation.startPeriod, reservation.endPeriod)}</p>
+									{!hideReservator && <p className="reservator">{user?.name}</p>}
+									{!hideReserved && <p className="bike_reserved">{bike?.name}</p>}
+									<p className="period">{combineDates(reservation.startPeriod, reservation.endPeriod)}</p>
 								</div>
 								<button className="cancel_button" onClick={(e) => cancelReservation(e, reservation._id)}>
 									<Deleteicon fill={'var(--button-text-default)'} />

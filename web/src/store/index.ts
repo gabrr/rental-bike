@@ -3,11 +3,13 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { themeReducer } from 'store/theme/reducer';
 import { bikeReducer } from 'store/bikes/reducer';
+import { userReducer } from 'store/users/reducer';
 
 // reducers
 const reducers = combineReducers({
 	themeReducer,
-	bikeReducer
+	bikeReducer,
+	userReducer,
 })
 
 export type AppState = ReturnType<typeof reducers>;

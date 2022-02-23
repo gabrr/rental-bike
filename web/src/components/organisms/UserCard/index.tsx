@@ -1,21 +1,18 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { Button, Editicon } from 'components/atoms'
+import { Editicon } from 'components/atoms'
 import { ReservationList } from 'components/templates'
 import { useNavigate } from 'react-router'
+import { IReservationResponse } from 'types/reservation'
 
 interface Props {
 	user: {
 		_id: string,
-		userName: string
+		name: string
 		email: string
-		reservations: {
-			_id: string
-			bike: string
-			startPeriod: Date,
-			endPeriod: Date,
-		}[]
+		role: string
+		reservations: IReservationResponse[]
 	}
 }
 
@@ -31,7 +28,8 @@ export const UserCard: React.FC<Props> = ({ user }) => {
 		<Div isExpanded={isExpanded} onClick={toggleExpanded}>
 			<div className="card_header">
 				<div className="left">
-					<p className="user_name">{user.userName}</p>
+					<p className="user_name">{user.name}</p>
+					<p className="user_role">{user.role}</p>
 				</div>
 				<div className="right">
 					<div className="reservations_counter">
@@ -57,6 +55,8 @@ const Div = styled.div<{ isExpanded: boolean }>`
 	background-color: var(--background-color);
 	border-radius: var(--border-radius);
 	box-shadow: 5px 5px 17px 0px rgba(0, 0, 0, 0.12);
+	user-select: none;
+	cursor: pointer;
 
 	.card_header {
 		display: flex;
@@ -67,8 +67,24 @@ const Div = styled.div<{ isExpanded: boolean }>`
 		color: var(--primary-text);
 		font-size: 1.1rem;
 
+		.left {
+			display: flex;
+		}
+
 		.user_name {
 			margin: 0.7rem 0;
+			width: 150px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.user_role {
+			font-weight: 700;
+			font-size: 1.2rem;
+			margin: 0.7rem;
+			text-transform: capitalize;
+			color: var(--secondary-text);
 		}
 	}
 

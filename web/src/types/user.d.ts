@@ -1,8 +1,19 @@
+import { IReservationResponse } from "./reservation";
+
 export interface IUSer {
 	name: string
 	email: string
 	role: string
 	password: string
+}
+
+export interface IUSerWithReservations {
+	_id: string
+	name: string
+	email: string
+	role: string
+	password: string
+	reservations: IReservationResponse[]
 }
 
 export interface IUserResponse {

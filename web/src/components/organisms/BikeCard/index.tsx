@@ -56,7 +56,7 @@ export const BikeCard: React.FC<Props> = ({ bike }) => {
 				</Button>
 			</div>
 
-			<ReservationList reservations={bike.reservations} />
+			<ReservationList reservations={bike.reservations} bike={bike} />
 
 		</Div>
 	)

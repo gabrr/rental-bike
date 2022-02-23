@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HomeLists } from 'components/templates/HomeLists'
 import styled from 'styled-components'
 import { UserCard } from 'components/organisms'
-import { users } from 'mock/users'
 import { popping } from 'animations'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUsers } from 'store/users/actions'
 
 export const Users = () => {
+
+	const dispatch = useDispatch()
+	const users = useSelector(state => state.userReducer)
+
+	useEffect(() => {
+		getUsers(dispatch)
+	}, [])
+
 	return (
 		<HomeLists hideFilter role='admin' tab='Users'>
 			<Div>

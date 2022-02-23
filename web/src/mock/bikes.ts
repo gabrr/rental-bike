@@ -8,7 +8,7 @@ import k2 from 'assets/k2.png'
 import _ from 'lodash'
 
 
-export const bikes: IBike[] = [
+export const bikes = [
 	{
 		_id: "Bike z1",
 		name: 'Bike z1',

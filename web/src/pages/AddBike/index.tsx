@@ -37,7 +37,6 @@ export const AddBike = () => {
 			setisLoading(true)
 			editBike(bikeResponse._id, { img: imageUrl })
 				.then((data) => {
-					setisLoading(false)
 					setbikeResponse(data)
 					navigate('/')
 				})

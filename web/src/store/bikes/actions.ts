@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux';
 import { getAllBikes } from 'services/bike';
 import { getReservationByBike } from 'services/reservation';
-import { store } from 'store';
 import { notifyError } from 'utils/notifier';
 import { UPDATE_BIKES } from './constants';
 

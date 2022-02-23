@@ -1,3 +1,5 @@
+import { IReservationResponse } from "./reservation";
+
 export interface IBike {
     _id: string
 		name: string
@@ -5,13 +7,7 @@ export interface IBike {
 		color: string
 		img: string
 		address: string
-		reservations: {
-			_id: string
-			userId?: string
-			bikeId?: string
-			startPeriod: Date
-			endPeriod: Date
-		}[]
+		reservations: IReservationResponse[]
 }
 
 export interface IBikeResponse {
