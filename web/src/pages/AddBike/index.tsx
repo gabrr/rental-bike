@@ -11,7 +11,7 @@ import { BIKE_INPUT_ERRORS, isBikeInputValid } from 'utils/inputValidators'
 import { IBikeResponse } from 'types/bike'
 import { notifyError } from 'utils/notifier'
 import { useNavigate } from 'react-router'
-import { COLORS, LOCATIONS } from 'mock/assistence'
+import { BIKE_MODELS, COLORS, LOCATIONS } from 'mock/assistence'
 
 interface IForm {
 	name: string
@@ -102,13 +102,12 @@ export const AddBike = () => {
 						type='text'
 						onChange={(e) => handleInputs(e, 'name')}
 					/>
-					<Input
-						className='inputs'
-						placeholder='Model'
-						error={errors?.['model']}
-						type='text'
-						onChange={(e) => handleInputs(e, 'model')}
-					/>
+					<select required name="model" id="model" onChange={(e) => handleSelect(e, 'model')}>
+						<option value="">Select a model</option>
+						{BIKE_MODELS.map((string) => {
+							return <option key={string} value={string}>{string}</option>
+						})}
+					</select>
 					<select required name="address" id="address" onChange={(e) => handleSelect(e, 'address')}>
 						<option value="">Select a location</option>
 						{LOCATIONS.map((string) => {

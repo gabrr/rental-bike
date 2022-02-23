@@ -15,3 +15,10 @@ export const COLORS = {
 	"Red": "#fe0202",
 	"Green": "#3ed80e",
 }
+
+export const BIKE_MODELS = [
+	'Thrill',
+	'For Kids',
+	'Nostalgic',
+	'Normal',
+] 
