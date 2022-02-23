@@ -13,3 +13,8 @@ export interface IUserResponse {
 	"createdAt": string
 	"updatedAt": string
 }
+
+export interface IEditUser {
+	name: string
+	role: string
+}
