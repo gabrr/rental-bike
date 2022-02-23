@@ -19,12 +19,20 @@ export const allBikes: IAllBikes[] = [
 				startPeriod: new Date("2022/03/01").toISOString(),
 				endPeriod: new Date("2022/03/01").toISOString()
 			}
-		]
+		],
+		"rating": [{
+			"userId": "6216a2e266a89733528dc4f1",
+			"rate": 4
+		}]
 	},
 	{
 		address: LOCATIONS[0],
 		color: "red",
 		model: BIKE_MODELS[1],
+		"rating": [{
+			"userId": "6216a2e266a89733528dc4f1",
+			"rate": 4
+		}],
 		reservations: [
 			{
 				startPeriod: new Date("2022/03/01").toISOString(),
@@ -40,6 +48,10 @@ export const allBikes: IAllBikes[] = [
 		address: LOCATIONS[2],
 		color: "pink",
 		model: BIKE_MODELS[2],
+		"rating": [{
+			"userId": "6216a2e266a89733528dc4f1",
+			"rate": 4
+		}],
 		reservations: []
 	},
 ]

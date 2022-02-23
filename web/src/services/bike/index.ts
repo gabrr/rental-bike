@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios"
 import { IBike } from 'types'
 import { IBikeResponse, IEditBike } from "types/bike"
 
-type CreateBike = (newBike: Omit<IBike, 'reservations' | '_id' | 'img'>) => Promise<IBikeResponse>
+type CreateBike = (newBike: Omit<IBike, 'reservations' | '_id' | 'img' | 'rating'>) => Promise<IBikeResponse>
 
 export const createBike: CreateBike = async (newBike) => {
     try {
@@ -40,6 +40,16 @@ export const deleteBike = async (bikeId: string) => {
 export const getAllBikes = async () => {
     try {
 			const response: AxiosResponse<IBikeResponse[]> = await Api.get(`bike/`)
+			return response.data
+
+    } catch (error) {
+        throw error
+    }
+}
+
+export const rateBike = async (rate: number, bikeId: string) => {
+    try {
+			const response: AxiosResponse<IBikeResponse[]> = await Api.post(`bike/rate/${bikeId}`, { rate })
 			return response.data
 
     } catch (error) {

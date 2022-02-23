@@ -11,7 +11,11 @@ import { ReservationList } from 'components/templates'
 import { IUserResponse } from 'types/user'
 import { useReservation } from 'hooks/reservation'
 import { IReservation } from 'types/reservation'
-import { notifyError, notifyInfo } from 'utils/notifier'
+import { notifyError, notifyInfo, notifySucess } from 'utils/notifier'
+import { rateBike } from 'services/bike'
+import { getBikes } from 'store/bikes/actions'
+import { useDispatch } from 'react-redux'
+import { bikeRateAverage } from 'utils/bikeRatingAverage'
 
 
 interface Props {
@@ -28,6 +32,7 @@ export const BikeCard: React.FC<Props> = ({ bike, user }) => {
 	} = useReservation()
 		
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
 	const toggleExpanded = () => setisExpanded(state => !state)
 
@@ -60,6 +65,17 @@ export const BikeCard: React.FC<Props> = ({ bike, user }) => {
 		}))
 	}
 
+	const handleRating = (value: number) => {
+		rateBike(value, bike._id)
+			.then(async () => {
+				getBikes(dispatch)
+				notifySucess("Bike rated successfully!")
+			})
+			.catch(error => {
+				notifyError(error.request.response || "Error to rate bike.")
+			})
+	}
+
 	return (
 		<Div isAvailable={isAvailable} isExpanded={isExpanded} onClick={toggleExpanded}>
 			{isAdmin && <button className="edit_button" onClick={goToEditBike}>
@@ -78,7 +94,12 @@ export const BikeCard: React.FC<Props> = ({ bike, user }) => {
 						<Pin />
 						<p className="address">{bike.address}</p>
 					</div>
-					<ReactRating emptySymbol={<Star />} fullSymbol={<Star isFull />} />
+					<ReactRating
+						emptySymbol={<Star />}
+						fullSymbol={<Star isFull />}
+						onChange={handleRating}
+						initialRating={bikeRateAverage(bike)}
+					/>
 				</div>
 			</div>
 

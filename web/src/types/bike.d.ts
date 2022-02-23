@@ -8,6 +8,10 @@ export interface IBike {
 		img: string
 		address: string
 		reservations: IReservationResponse[]
+		rating: {
+			userId: string
+			rate: number
+		}[]
 }
 
 export interface IBikeResponse {
