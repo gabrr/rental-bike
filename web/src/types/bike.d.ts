@@ -7,7 +7,8 @@ export interface IBike {
 		address: string
 		reservations: {
 			_id: string
-			userId: string
+			userId?: string
+			bikeId?: string
 			startPeriod: Date
 			endPeriod: Date
 		}[]

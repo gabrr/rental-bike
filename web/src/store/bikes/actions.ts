@@ -1,18 +1,29 @@
-import { IBike } from 'types';
-import { ADD_ITEM, UPDATE_ITEM, REMOVE_ITEM } from './constants';
+import { Dispatch } from 'redux';
+import { getAllBikes } from 'services/bike';
+import { getReservationByBike } from 'services/reservation';
+import { store } from 'store';
+import { notifyError } from 'utils/notifier';
+import { UPDATE_BIKES } from './constants';
 
 
-export const addItem = ({ id, label = '' }: { id: string, label?: string }) => ({
-    type: ADD_ITEM,
-    payload: { item: { id, label, isSelected: false, isEditing: true } }
-})
+export const getBikes = (dispatch: Dispatch) => {
 
-export const updateItem = (item: IBike) => ({
-    type: UPDATE_ITEM,
-    payload: { item }
-})
-
-export const deleteItem = (id: string) => ({
-    type: REMOVE_ITEM,
-    payload: { item: { _id: id } }
-})
+	getAllBikes()
+		.then(async (bikes) => {
+			const bikesWithReservations = bikes.map(async (bike) => {
+				const reservations = await getReservationByBike(bike._id);
+	
+				return ({
+					...bike,
+					reservations
+				})
+			})		
+	
+			dispatch({ 
+				type: UPDATE_BIKES,
+				payload: { bikes: await Promise.all(bikesWithReservations) }
+			})
+		})
+		.catch(error => notifyError(error.request.response))
+  
+}

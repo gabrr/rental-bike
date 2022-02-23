@@ -25,7 +25,7 @@ export const BikeCard: React.FC<Props> = ({ bike }) => {
 	
 	const isAvailable = !!bike.reservations.length
 
-	const isAdmin = false
+	const isAdmin = true
 
 	return (
 		<Div isAvailable={isAvailable} isExpanded={isExpanded} onClick={toggleExpanded}>
@@ -75,9 +75,9 @@ const Div = styled.div<{ isAvailable: boolean, isExpanded: boolean }>`
 	display: flex;
 	flex-direction: column;
 	box-shadow: 5px 5px 17px 0px rgba(0, 0, 0, 0.12);
-	filter: ${({ isAvailable }) => isAvailable ? 'grayscale(0)' : 'grayscale(1)'};
-	opacity:${({ isAvailable }) => isAvailable ? '1' : '0.3'};
-	pointer-events: ${({ isAvailable }) => isAvailable ? 'all' : 'none'};
+	filter: ${({ isAvailable }) => !isAvailable ? 'grayscale(0)' : 'grayscale(1)'};
+	opacity:${({ isAvailable }) => !isAvailable ? '1' : '0.3'};
+	pointer-events: ${({ isAvailable }) => !isAvailable ? 'all' : 'none'};
 
 	.card_display {
 		display: flex;
