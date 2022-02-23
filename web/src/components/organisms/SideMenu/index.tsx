@@ -78,6 +78,7 @@ const Div = styled.div`
 	flex-direction: column;
 	gap: 1.8rem;
 	justify-content: center;
+	z-index: 2;
 
 	&.opened {
 		transform: translateX(0);

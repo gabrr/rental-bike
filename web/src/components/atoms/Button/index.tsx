@@ -20,9 +20,10 @@ export const Button: React.FC<Props> = ({
 	disabled,
 	isLoading,
 	buttonPurpose,
+	onClick,
 }) => {
 	return (
-		<StyledButton {...{ className, type: buttonType, disabled, isLoading, buttonPurpose }}>
+		<StyledButton {...{ className, type: buttonType, disabled, isLoading, buttonPurpose, onClick }}>
 			{children}
 		</StyledButton>
 	)
