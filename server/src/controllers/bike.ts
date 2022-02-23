@@ -1,9 +1,11 @@
+import jwt from 'jsonwebtoken'
 import Bike from 'models/Bike'
 import { Request, Response } from 'express'
-import { createBikeValidation, editBikeValidation } from 'utils/validation'
+import { createBikeValidation, editBikeValidation, rateBikeValidation } from 'utils/validation'
 import multer from 'multer'
 import path from 'path'
-import { PORT } from 'config/env'
+import { JWT_SECRET, PORT } from 'config/env'
+import { IUserToken } from 'types/jwt'
 
 class BikeController {
     async index(req: Request, res: Response ) {
@@ -86,7 +88,31 @@ class BikeController {
         return res.status(401).json(error.message)
     }
 		}
-		
+
+		async rateBike(req: Request, res: Response) {
+			try {
+
+				const { error } = rateBikeValidation(req.body)
+				if (error) throw Error(error.details[0].message)
+
+				const token = req.cookies.token || ''
+				const bikeId = req.params.bikeId
+				const rateGiven = req.body.rate
+
+				const { _id } = jwt.verify(token, JWT_SECRET) as IUserToken
+
+				const rating = {
+					userId: _id,
+					rate: rateGiven
+				}
+
+				const newBike = await Bike.findByIdAndUpdate(bikeId, { rating }, { new: true })
+				return res.json(newBike)
+				
+			} catch (error: any) {
+				return res.status(401).json(error.message)
+			}
+		}
 }
 
 export default new BikeController()

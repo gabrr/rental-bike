@@ -69,6 +69,15 @@ export const editBikeValidation = (body: any) => {
 	return schema.validate(body)
 }
 
+export const rateBikeValidation = (body: any) => {
+	
+	const schema = Joi.object({
+		rate: Joi.number().required(),
+	})
+
+	return schema.validate(body)
+}
+
 export const createReservationValidation = (body: any) => {
 	
 	const schema = Joi.object({
