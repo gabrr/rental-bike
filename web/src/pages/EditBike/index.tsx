@@ -1,35 +1,115 @@
-import React from 'react'
+import React, { createRef, useState } from 'react'
 import styled from 'styled-components'
 import ReactRating from 'react-rating'
 
 import { CreateEdit, ReservationList } from 'components/templates'
 import { Button, Input, Star } from 'components/atoms'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
+import { useSelector } from 'react-redux'
+import { IBike, isBikeInputValidProps } from 'types'
+import { ImageUploader } from 'components/organisms'
+import { BIKE_INPUT_ERRORS, isBikeInputValid } from 'utils/inputValidators'
+import { deleteBike, editBike, getAllBikes } from 'services/bike'
+import { notifyError } from 'utils/notifier'
+
+interface IForm {
+	name?: string
+	model?: string
+	color?: string
+	address?: string
+}
 
 export const EditBike = () => {
 
-	//const { bikeId } = useParams()
+	const container = createRef<HTMLDivElement>()
+	const form = createRef<HTMLFormElement>()
 
-	//console.log('bike: ', bikeId)
+	const { bikeId } = useParams()
+	const bike = useSelector(state => state.bikeReducer.find(({ _id }) => _id === bikeId) ?? {} as IBike)
 
-	const reservations = [
-		{
-			_id: 'hjbkn',
-			user: 'Gabriel Oliveira',
-			bike: 'Z2',
-			startPeriod: new Date(),
-			endPeriod: new Date(),
+	const [editingBike, seteditingBike] = useState<IForm>({} as IForm)
+	const [errors, seterrors] = useState<IForm>({} as IForm)
+	const [isLoading, setisLoading] = useState(false)
+
+	const navigate = useNavigate()
+
+	const handleBikeUpdate = () => {
+		setisLoading(true)
+		form.current?.requestSubmit()
+		editBike(bikeId || '', editingBike)
+			.then(async () => {
+				setisLoading(false)
+				await getAllBikes()
+				navigate('/')
+			})
+			.catch(error => {
+				notifyError(error.request.response)
+				setisLoading(false)
+			})
+	}
+
+	const handleBikeDelete = () => {
+		setisLoading(true)
+		deleteBike(bikeId || '')
+			.then(() => {
+				setisLoading(false)
+				navigate('/')
+			})
+			.catch(error => {
+				notifyError(error.request.response)
+				setisLoading(false)
+			})
+	}
+
+	const handleInputs = (e: React.FormEvent<HTMLInputElement>, name: isBikeInputValidProps['type']) => {
+		const value = e.currentTarget.value
+
+		if (!isBikeInputValid({ type: name, value })) {
+			seterrors(prev => ({ ...prev, [name]: BIKE_INPUT_ERRORS[name] }))
+			seteditingBike(prev => ({ ...prev, [name]: value }))
+			return
 		}
-	]
+
+		seterrors(prev => ({ ...prev, [name]: '' }))
+		seteditingBike(prev => ({ ...prev, [name]: value }))
+	}
 
 	return (
 		<CreateEdit role='admin' title='Edit Bike'>
 			<Div>
 				<form onSubmit={() => {}}>
-					<Input className='inputs' placeholder='Name' />
-					<Input className='inputs' placeholder='Model' />
-					<Input className='inputs' placeholder='Color' />
-					<Input className='inputs' placeholder='Location' />
+					<Input
+						error={errors?.['name']}
+						className="inputs"
+						placeholder='Name'
+						type='text'
+						defaultValue={bike?.name || ''}
+						onChange={(e) => handleInputs(e, 'name')}
+					/>
+					<Input
+						className='inputs'
+						placeholder='Model'
+						error={errors?.['model']}
+						type='text'
+						defaultValue={bike?.model || ''}
+						onChange={(e) => handleInputs(e, 'model')}
+					/>
+					<Input
+						className='inputs'
+						placeholder='Color'
+						error={errors?.['color']}
+						type='text'
+						defaultValue={bike?.color || ''}
+						onChange={(e) => handleInputs(e, 'color')}
+					/>
+					<Input
+						className='inputs'
+						placeholder='Address'
+						error={errors?.['address']}
+						type='text'
+						defaultValue={bike?.address || ''}
+						onChange={(e) => handleInputs(e, 'address')}
+					/>
 				</form>
 
 				<div className='react_rating'>
@@ -37,20 +117,34 @@ export const EditBike = () => {
 					<ReactRating emptySymbol={<Star />} fullSymbol={<Star isFull />} />
 				</div>
 
-				<div className="upload_file">
-					Upload File
-				</div>
+				<ImageUploader
+					bikeId={bikeId}
+					container={container}
+					form={form}
+					defaultValue={bike?.img || ''}
+				/>
 
 				<section className="actions">
-					<Button className='delete' buttonPurpose='negative' isLoading={false}>
+					<Button
+						className='delete'
+						buttonPurpose='negative'
+						isLoading={isLoading}
+						onClick={handleBikeDelete}
+					>
 						Delete Bike
 					</Button>
-					<Button className='update' buttonPurpose='positive' isLoading={false}>
+
+					<Button
+						className='update'
+						buttonPurpose='positive'
+						isLoading={isLoading}
+						onClick={handleBikeUpdate}
+					>
 						Update Bike
 					</Button>
 				</section>
 
-				<ReservationList hideReserved reservations={reservations} />
+				<ReservationList hideReserved reservations={bike.reservations} />
 
 			</Div>
 		</CreateEdit>

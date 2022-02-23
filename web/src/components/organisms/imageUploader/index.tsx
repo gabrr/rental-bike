@@ -1,4 +1,4 @@
-import React, { ChangeEvent, createRef, DragEvent, useEffect, useRef } from 'react'
+import React, { ChangeEvent, DragEvent, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { callInLine } from 'utils'
 import * as upload from './helper'
@@ -6,13 +6,24 @@ import * as upload from './helper'
 interface Props {
 	form: React.RefObject<HTMLFormElement>
 	container: React.RefObject<HTMLDivElement>
-	onFormSubmit: (props?: any) => any
+	onFormSubmit?: (props?: any) => any
 	bikeId: string | undefined
+	defaultValue?: string
 }
 
-export const ImageUploader: React.FC<Props> = ({ form, container, onFormSubmit, bikeId }) => {
+export const ImageUploader: React.FC<Props> = ({ form, container, onFormSubmit, bikeId, defaultValue }) => {
 
 	const input = useRef<HTMLInputElement>(null)
+
+	useEffect(() => {
+		if (defaultValue) {
+			fetch(defaultValue)
+				.then(r => r.blob())
+				.then(imageBlob => {
+					upload.updateThumbnail(container.current as HTMLElement, new File([imageBlob], 'bike.png', { type: 'image/' }))
+				})	
+		}
+	}, [defaultValue])
 
 	useEffect(() => {
 		//As soon as we get the Bike ID, we should force the onSubmit to be updated.

@@ -6,7 +6,7 @@ import { combineStartEndPeriod } from 'utils'
 interface Props {
 	hideReservator?: boolean
 	hideReserved?: boolean
-	reservations: {
+	reservations?: {
 		_id: string
 		user?: string
 		bike?: string
@@ -29,7 +29,7 @@ export const ReservationList: React.FC<Props> = ({ reservations, hideReservator,
 
 			<div className="list">
 				
-					{reservations.map((reservation) => {
+					{reservations?.map((reservation) => {
 						return (
 							<div key={reservation._id} className="reservation">
 								<div className="left">

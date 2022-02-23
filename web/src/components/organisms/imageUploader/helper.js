@@ -68,7 +68,7 @@ export const checkIsImageFiles = (files) => {
  * @returns {Promise<HttpResponse>}
  */
 
-export const sendFiles = (form, files, bikeId, onFormSubmit) => {
+export const sendFiles = (form, files, bikeId, onFormSubmit = () => {}) => {
     form.onsubmit = async (e) => {
         e.preventDefault()
 
