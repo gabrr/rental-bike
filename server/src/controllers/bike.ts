@@ -24,22 +24,26 @@ class BikeController {
 				res.json('bike deleted!')
 
 			} catch (error: any) {
-				return res.json(error.message)
+				return res.status(401).json(error.message)
 			}
 		}
 
 		async createBike(req: Request, res: Response) {
 			try {
+				const isNameExisting = await Bike.findOne({ name: req.body.name })
+
 				const { error } = createBikeValidation(req.body)
 				if (error) throw Error(error.details[0].message)
 				
+				if (isNameExisting) throw Error('This bike already exists.')
+
 				const newBike = await new Bike(req.body)
 				newBike.save()
 
-				return res.json({ bike: newBike })
+				return res.json(newBike)
 
 			} catch (error: any) {
-				return res.json(error.message)
+				return res.status(401).json(error.message)
 			}
 		}
 		
@@ -55,7 +59,7 @@ class BikeController {
 				return res.json(newBike)
 				
 			} catch (error: any) {
-				return res.json(error.message)
+				return res.status(401).json(error.message)
 			}
 		}
 
@@ -65,7 +69,7 @@ class BikeController {
 						cb(null, path.join(__dirname, '.', '..', 'uploads'))
 				},
 				filename: function (req, file, cb) {
-						const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+						const uniqueSuffix = req.params.bikeId
 						cb(null, file.fieldname + '-' + uniqueSuffix + '.png')
 				}
 			})
@@ -79,7 +83,7 @@ class BikeController {
 				return res.json({ image: path })
         
     	} catch (error: any) {
-        return res.json(error.message)
+        return res.status(401).json(error.message)
     }
 		}
 		

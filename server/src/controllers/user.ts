@@ -41,34 +41,49 @@ class UserController {
 		}
 
     async signUp(req: Request, res: Response) {
-        try {
-					const isEmailExisting = await User.findOne({ email: req.body.email })
+			// To ease the validation of the app, I am forcing to create an admin account.
+			const admin = { email: "admin@admin.com", name: 'Admin', role: 'admin', password: 'admin123' }
+			const hasAdminAccount = await User.findOne({ email: admin.email })
 
-					const { error } = signUpValidation(req.body)
+			if (!hasAdminAccount) {
+				const adminPassword = await bcrypt.hash(admin.password, 10)
+				const newAdmin = {
+					...admin,
+					password: adminPassword
+				}
+				const adminCreated = new User(newAdmin)
+				await adminCreated.save()
+			}
+			// End creating admin account.
 
-					if (error) throw Error(error.details[0].message)
-					if (isEmailExisting) throw Error('E-mail unavailable.')
+			try {
+				const isEmailExisting = await User.findOne({ email: req.body.email })
 
-					const hashedPassword = await bcrypt.hashSync(req.body.password, 10)
+				const { error } = signUpValidation(req.body)
+
+				if (error) throw Error(error.details[0].message)
+				if (isEmailExisting) throw Error('E-mail unavailable.')
+
+				const hashedPassword = await bcrypt.hash(req.body.password, 10)
+				
+				const newUser = {
+					...req.body,
+					role: 'user',
+					password: hashedPassword
+				}
+
+				const userCreated = new User(newUser)
+				await userCreated.save()
+				
+				const token = jwt.sign({ _id: userCreated._id, role: userCreated.role }, JWT_SECRET, { expiresIn: "2h" })
+				res.cookie('token', token, { maxAge: 60 * 60 * 24 * 7, httpOnly: true });
+
+				const { password, ...userCreatedPL } = userCreated._doc
+				return res.json(userCreatedPL)
 					
-					const newUser = {
-						...req.body,
-						role: 'user',
-						password: hashedPassword
-					}
-
-					const userCreated = new User(newUser)
-					await userCreated.save()
-					
-					const token = jwt.sign({ _id: userCreated._id, role: userCreated.role }, JWT_SECRET, { expiresIn: "2h" })
-					res.cookie('token', token, { maxAge: 60 * 60 * 24 * 7, httpOnly: true });
-
-					const { password, ...userCreatedPL } = userCreated._doc
-					return res.json(userCreatedPL)
-            
-        } catch (error: any) {
-            return res.status(400).json(error.message)
-        }
+			} catch (error: any) {
+					return res.status(400).json(error.message)
+			}
 
     }
 

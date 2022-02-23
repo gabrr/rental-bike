@@ -37,7 +37,7 @@ export const createBikeValidation = (body: any) => {
 		name: Joi.string().min(4).required(),
 		model: Joi.string().min(1).required(),
 		color: Joi.string().min(3).required(),
-		img: Joi.string().required(),
+		img: Joi.string(),
 		address: Joi.string().required(),
 	})
 
