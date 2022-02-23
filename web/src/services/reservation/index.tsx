@@ -14,7 +14,7 @@ export const getReservations = async (): Promise<{ data: IReservation[] | [], er
 
 type CreateReservation = (newReservation: IReservation) => Promise<IReservationResponse>
 
-export const createreservation: CreateReservation = async (newReservation) => {
+export const createReservation: CreateReservation = async (newReservation) => {
     try {
 			const response: AxiosResponse<IReservationResponse> = await Api.post('reservation/create-reservation', newReservation)
 			return response.data

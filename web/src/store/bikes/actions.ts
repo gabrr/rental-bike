@@ -7,7 +7,7 @@ import { UPDATE_BIKES } from './constants';
 
 export const getBikes = (dispatch: Dispatch) => {
 
-	getAllBikes()
+	return getAllBikes()
 		.then(async (bikes) => {
 			const bikesWithReservations = bikes.map(async (bike) => {
 				const reservations = await getReservationByBike(bike._id);
@@ -24,5 +24,4 @@ export const getBikes = (dispatch: Dispatch) => {
 			})
 		})
 		.catch(error => notifyError(error.request.response))
-  
 }

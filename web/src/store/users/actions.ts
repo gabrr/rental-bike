@@ -1,15 +1,15 @@
 import { Dispatch } from 'redux';
-import { getReservationByBike } from 'services/reservation';
+import { getReservationByUser } from 'services/reservation';
 import { getAllUsers } from 'services/user';
 import { notifyError } from 'utils/notifier';
 import { UPDATE_USERS } from './constants';
 
 
 export const getUsers = (dispatch: Dispatch) => {
-	getAllUsers()
+	return getAllUsers()
 		.then(async (users) => {
 			const usersWithReservations = users.map(async (user) => {
-				const reservations = await getReservationByBike(user._id);
+				const reservations = await getReservationByUser(user._id);
 	
 				return ({
 					...user,
