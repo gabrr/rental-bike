@@ -5,6 +5,7 @@ import { IBikeResponse } from 'types/bike'
 import { IReservationResponse } from 'types/reservation'
 import { IUserResponse } from 'types/user'
 import { combineStartEndPeriod } from 'utils'
+import { useReservation } from 'hooks/reservation'
 
 interface Props {
 	hideReservator?: boolean
@@ -16,8 +17,11 @@ interface Props {
 
 export const ReservationList: React.FC<Props> = ({ reservations, hideReservator, hideReserved, bike, user }) => {
 
+	const { handleDeleteReservation } = useReservation()
+
 	const cancelReservation = (e: React.MouseEvent, id: string) => {
 		e.stopPropagation()
+		handleDeleteReservation(id)
 	}	
 
 	const combineDates = (string: string, string2: string) => {

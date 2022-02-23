@@ -7,7 +7,7 @@ import { useFilter } from 'hooks/filter'
 
 interface Props {
 	tab: 'Bikes' | 'Users'
-	role: 'admin' | 'user'
+	role: string
 	hideFilter?: boolean
 }
 
@@ -30,7 +30,7 @@ export const HomeLists: React.FC<Props> = ({ role, tab, hideFilter, children }) 
 					{!hideFilter && <button className='header_button' onClick={toggleFilter}>
 						<FilterIcon />
 					</button>}
-					{isAdmin && <button className='header_button' onClick={toggleMenu}><Toggle isActive={isMenuOpen} /></button>}
+					<button className='header_button' onClick={toggleMenu}><Toggle isActive={isMenuOpen} /></button>
 				</div>
 			</div>
 

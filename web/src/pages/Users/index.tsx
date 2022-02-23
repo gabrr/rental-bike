@@ -5,9 +5,11 @@ import { UserCard } from 'components/organisms'
 import { popping } from 'animations'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from 'store/users/actions'
+import { useAuth } from 'hooks/auth'
 
 export const Users = () => {
-
+	
+	const { user } = useAuth()
 	const dispatch = useDispatch()
 	const users = useSelector(state => state.userReducer)
 
@@ -16,7 +18,7 @@ export const Users = () => {
 	}, [])
 
 	return (
-		<HomeLists hideFilter role='admin' tab='Users'>
+		<HomeLists hideFilter role={user?.role || 'user'} tab='Users'>
 			<Div>
 				{users.map((user) => <UserCard key={user._id} user={user} />)}
 			</Div>

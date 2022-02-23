@@ -2,7 +2,7 @@ import { Api } from "api"
 import { AxiosResponse } from "axios"
 import { signUp as handleSignUp } from "services/user";
 import { ISignIn } from "types/auth";
-import { IUSer } from "types/user"
+import { IUSer, IUserResponse } from "types/user"
 
 
 export interface SignInResponse extends Omit<IUSer, 'password'> {
@@ -18,7 +18,7 @@ class Auth {
 
   async signin(user: ISignIn) {
 		try {
-			const response: AxiosResponse<SignInResponse> = await Api.post('user/signin', user)
+			const response: AxiosResponse<IUserResponse> = await Api.post('user/signin', user)
 			this.authenticated = true
 			return response.data
 

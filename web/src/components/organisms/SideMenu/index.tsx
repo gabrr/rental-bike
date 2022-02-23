@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router'
 import styled from 'styled-components'
 
 export const SideMenu: React.FC = () => {
-	const { signout } = useAuth()
+	const { signout, user } = useAuth()
 	const { isOpen, toggle } = useSideMenu()
 	const navigate = useNavigate()
 
@@ -34,10 +34,12 @@ export const SideMenu: React.FC = () => {
 
 	const options = [
 		{
+			adminRoute: true,
 			label: 'Create User',
 			action: goToCreateUser,
 		},
 		{
+			adminRoute: true,
 			label: 'Add Bike',
 			action: goToAddBike,
 		},
@@ -53,7 +55,7 @@ export const SideMenu: React.FC = () => {
 			label: 'Sign Out',
 			action: handleSignUp,
 		},
-	]
+	].filter(({ adminRoute }) => ((user?.role !== "admin") && !adminRoute) || user?.role === "admin")
 
 	return (
 		<Div className={isOpen ? 'opened' : ''}>

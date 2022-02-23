@@ -4,20 +4,21 @@ import { createReservation, deleteReservation, editReservation } from 'services/
 import { getBikes } from 'store/bikes/actions'
 import { getUsers } from 'store/users/actions'
 import { IEditReservation, IReservation } from 'types/reservation'
-import { notifyError } from 'utils/notifier'
+import { notifyError, notifySucess } from 'utils/notifier'
 
 export const useReservation = () => {
 	const dispatch = useDispatch()
 	const [isLoading, setisLoading] = useState(false)
 	const reservations = useSelector(state => state.reservationReducer)
 
-	const updateUserAndBikeReservations = () => Promise.all([() => getUsers(dispatch), () => getBikes(dispatch)])
+	const updateUserAndBikeReservations = () => Promise.all([getUsers(dispatch), getBikes(dispatch)])
 
 	const handleDeleteReservation = (reservationId: string) => {
 		deleteReservation(reservationId)
 			.then(async () => {
 				await updateUserAndBikeReservations()
 				setisLoading(false)
+				notifySucess('Reservation deleted!')
 			})
 			.catch(error => {
 				notifyError(error.request.response)
@@ -30,6 +31,7 @@ export const useReservation = () => {
 			.then(async () => {
 				await updateUserAndBikeReservations()
 				setisLoading(false)
+				notifySucess('Reservation created!')
 			})
 			.catch(error => {
 				notifyError(error.request.response)
@@ -42,6 +44,7 @@ export const useReservation = () => {
 			.then(async () => {
 				await updateUserAndBikeReservations()
 				setisLoading(false)
+				notifySucess('Reservation updated!')
 			})
 			.catch(error => {
 				notifyError(error.request.response)

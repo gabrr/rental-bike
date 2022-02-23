@@ -8,14 +8,24 @@ import { IBike } from 'types'
 import { popping } from 'animations'
 import { useNavigate } from 'react-router'
 import { ReservationList } from 'components/templates'
+import { IUserResponse } from 'types/user'
+import { useReservation } from 'hooks/reservation'
+import { IReservation } from 'types/reservation'
+import { notifyError, notifyInfo } from 'utils/notifier'
 
 
 interface Props {
 	bike: IBike
+	user: IUserResponse | null
 }
 
-export const BikeCard: React.FC<Props> = ({ bike }) => {
+export const BikeCard: React.FC<Props> = ({ bike, user }) => {
 	const [isExpanded, setisExpanded] = useState(false)
+	const [reservationData, setreservationData] = useState<IReservation>({} as IReservation)
+
+	const {
+		handleReservation
+	} = useReservation()
 		
 	const navigate = useNavigate()
 
@@ -23,9 +33,32 @@ export const BikeCard: React.FC<Props> = ({ bike }) => {
 
 	const goToEditBike = () => navigate(`/edit-bike/${bike._id}`)
 	
-	const isAvailable = !!bike.reservations.length
+	const isAvailable = false
 
-	const isAdmin = true
+	const isAdmin = (user?.role === 'admin')
+
+	const reserveBike = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.stopPropagation()
+		if (!user?._id) return notifyError('Error to reserve a bike.')
+		if (!reservationData.startPeriod) return notifyInfo('A period should be selected.')
+
+		const payload: IReservation = {
+			bikeId: bike._id,
+			userId: user?._id,
+			startPeriod: reservationData.startPeriod,
+			endPeriod: reservationData.endPeriod
+		}
+
+		handleReservation(payload)
+	}
+
+	const handleReservationDateTime = (dateAndTime: { start: string, end: string }) => {
+		setreservationData(prev => ({
+			...prev,
+			startPeriod: dateAndTime.start,
+			endPeriod: dateAndTime.end
+		}))
+	}
 
 	return (
 		<Div isAvailable={isAvailable} isExpanded={isExpanded} onClick={toggleExpanded}>
@@ -50,8 +83,12 @@ export const BikeCard: React.FC<Props> = ({ bike }) => {
 			</div>
 
 			<div className="reserve_action" onClick={(e: React.MouseEvent<HTMLDivElement>) => {e.stopPropagation()}}>
-				<DatetimeRangePicker />
-				<Button buttonPurpose='default' isLoading={false}>
+				<DatetimeRangePicker onChange={handleReservationDateTime} />
+				<Button
+					onClick={reserveBike}
+					buttonPurpose='default'
+					isLoading={false}
+				>
 					Reserve
 				</Button>
 			</div>
@@ -140,5 +177,20 @@ const Div = styled.div<{ isAvailable: boolean, isExpanded: boolean }>`
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 3rem;
+		margin-top: 3rem;
+
+		.rdt input {
+			background-color: var(--input-background) !important;
+			border: none !important;
+			border-radius: var(--border-radius);
+			padding: 10px 20px;
+			color: var(--primary-text);
+			margin: 0.5rem 0;
+		}
+
+		button {
+			height: 40px;
+    	margin-top: 0.5rem;
+		}
 	}
 `

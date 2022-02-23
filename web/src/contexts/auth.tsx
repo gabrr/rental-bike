@@ -1,12 +1,12 @@
 import React from 'react'
 import auth from 'services/auth'
 import { ISignIn } from 'types/auth'
-import { IUSer } from 'types/user'
+import { IUSer, IUserResponse } from 'types/user'
 import { notifyError } from 'utils/notifier'
 
 interface AuthContextType {
-  user: Omit<IUSer, 'password'> | null
-	setUser: React.Dispatch<React.SetStateAction<Omit<IUSer, "password"> | null>>,
+  user: IUserResponse | null
+	setUser: React.Dispatch<React.SetStateAction<IUserResponse | null>>,
   signin: (user: ISignIn, callback?: any, fallback?: any) => void
 	signup: (newUser: Omit<IUSer, 'role'>, callback?: any, fallback?: any) => void
   signout: (callback?: any) => void
@@ -18,7 +18,7 @@ interface Props {
 	children: React.ReactNode
 }
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [user, setUser] = React.useState<Omit<IUSer, 'password'> | null>(null);
+  const [user, setUser] = React.useState<IUserResponse | null>(null);
 
   const signin: AuthContextType['signin'] = (userSigningIn, callback, fallback) => {
     auth.signin(userSigningIn)
