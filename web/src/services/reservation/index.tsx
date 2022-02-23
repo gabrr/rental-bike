@@ -4,7 +4,7 @@ import { IReservation, IReservationResponse, IEditReservation } from "types/rese
 
 export const getReservations = async (): Promise<{ data: IReservation[] | [], error: boolean }> => {
     try {
-        const response: AxiosResponse<any> = await Api.get('reservation/')
+        const response: AxiosResponse<IReservation[] | []> = await Api.get('reservation/')
         return { error: false, data: response.data }
 
     } catch (error) {
@@ -44,4 +44,24 @@ export const deleteReservation = async (reservationId: string) => {
     } catch (error) {
         throw error
     }
+}
+
+export const getReservationByUser = async (userId: string) => {
+	try {
+		const response: AxiosResponse<IReservation[] | []> = await Api.get(`reservation/user/${userId}`)
+		return response.data
+
+	} catch (error) {
+		throw error
+	}
+}
+
+export const getReservationByBike = async (bikeId: string) => {
+	try {
+		const response: AxiosResponse<IReservation[] | []> = await Api.get(`reservation/bike/${bikeId}`)
+		return response.data
+
+	} catch (error) {
+		throw error
+	}
 }
