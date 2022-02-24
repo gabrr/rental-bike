@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router'
 import styled from 'styled-components'
+import { IBike } from 'types'
 import ReactRating from 'react-rating'
 import DatetimeRangePicker from 'react-datetime-range-picker'
 
-import { Button, Editicon, Pin, Star } from 'components/atoms'
-import { IBike } from 'types'
-import { popping } from 'animations'
-import { useNavigate } from 'react-router'
+import { LinkButton, Editicon, Pin, Star, Button } from 'components/atoms'
+import { pageIn, popping } from 'animations'
 import { ReservationList } from 'components/templates'
 import { IUserResponse } from 'types/user'
 import { useReservation } from 'hooks/reservation'
@@ -16,36 +17,27 @@ import { rateBike } from 'services/bike'
 import { getBikes } from 'store/bikes/actions'
 import { useDispatch } from 'react-redux'
 import { bikeRateAverage } from 'utils/bikeRatingAverage'
+import { useAuth } from 'hooks/auth'
 
+export const ViewBike = () => {
 
-interface Props {
-	bike: IBike
-	user: IUserResponse | null
-}
+	const { bikeId } = useParams()
+	const { user } = useAuth()
+	const isAdmin = (user?.role === 'admin')
 
-export const BikeCard: React.FC<Props> = ({ bike, user }) => {
-	const [isExpanded, setisExpanded] = useState(false)
+	const bike = useSelector(state => state.bikeReducer.find(({ _id }) => _id === bikeId) ?? {} as IBike)
+
 	const [reservationData, setreservationData] = useState<IReservation>({} as IReservation)
 
-	const {
-		handleReservation
-	} = useReservation()
-		
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+	const { handleReservation } = useReservation()
 
-	const goToViewBike = () => {
-		setisExpanded(true)
-		setTimeout(() => {
-			navigate(`/bike/${bike._id}`)
-		}, 250)
-	}
+	const goBack = () => navigate('/')
 
 	const goToEditBike = () => navigate(`/edit-bike/${bike._id}`)
-	
-	const isAvailable = false
 
-	const isAdmin = (user?.role === 'admin')
+	
 
 	const reserveBike = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation()
@@ -81,11 +73,17 @@ export const BikeCard: React.FC<Props> = ({ bike, user }) => {
 			})
 	}
 
+
 	return (
-		<Div isAvailable={isAvailable} className={isExpanded ? 'expanded' : ''} onClick={goToViewBike}>
-			{isAdmin && <button className="edit_button" onClick={goToEditBike}>
-				<Editicon />
-			</button>}
+		<Div>
+			<div className="header">
+				<LinkButton onClick={goBack}>
+					Bikes List
+				</LinkButton>
+				{isAdmin && <button className="edit_button" onClick={goToEditBike}>
+					<Editicon />
+				</button>}
+			</div>
 
 			<div className="card_display">
 				<div className="card_left">
@@ -125,34 +123,20 @@ export const BikeCard: React.FC<Props> = ({ bike, user }) => {
 	)
 }
 
-const Div = styled.div<{ isAvailable: boolean, isExpanded?: boolean }>`
-	position: relative;
-	width: calc(90% - 10%);
-	animation: ${popping} 300ms ease-in-out;
-	margin: 0 auto;
-	padding: 1.7rem 5% 2.5rem;
-	height: 100px;
-	overflow: hidden;
-	background-color: var(--background-color);
-	border-radius: var(--border-radius);
-	display: flex;
-	flex-direction: column;
-	box-shadow: 5px 5px 17px 0px rgba(0, 0, 0, 0.12);
-	filter: ${({ isAvailable }) => !isAvailable ? 'grayscale(0)' : 'grayscale(1)'};
-	opacity:${({ isAvailable }) => !isAvailable ? '1' : '0.3'};
-	pointer-events: ${({ isAvailable }) => !isAvailable ? 'all' : 'none'};
-	transition: transform 250ms ease-in-out;
-	cursor: pointer;
-
-	&:hover {
-		transform: scale(0.99);
-		box-shadow: 1px 1px 4px -1px rgba(0, 0, 0, 0.3);
-	}
-
-	&.expanded {
-		transform: scale(30);
-		transform-origin: center;
-		z-index: 2;
+const Div = styled.div`
+	width: 90%;
+	padding-bottom: 4rem;
+	margin: auto;
+	max-width: 600px;
+	animation: ${pageIn} 300ms ease-in-out;
+	
+	.header {
+		width: 100%;
+		min-height: 70px;
+		margin: 1.5rem auto 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 
 	@media screen and (min-width: 850px) {
@@ -168,12 +152,27 @@ const Div = styled.div<{ isAvailable: boolean, isExpanded?: boolean }>`
 	}
 
 	.edit_button {
-		position: absolute;
-		right: 5%;
-		top: 1.7rem;
 		background: transparent;
 		border: none;
 		cursor: pointer;
+		transition: 150ms ease-in-out;
+		
+		&:hover svg {
+			transform: rotate(30deg);
+		}
+
+		svg {
+			width: 20px;
+			height: 20px;
+			transition: transform 350ms ease-in-out;
+		}
+
+		@media screen and (min-width: 850px) {
+			svg {
+				width: 27px;
+				height: 27px;
+			}
+		}
 	}
 
 	.card_left {
@@ -223,7 +222,7 @@ const Div = styled.div<{ isAvailable: boolean, isExpanded?: boolean }>`
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 3rem;
-		margin-top: 3rem;
+		margin-top: clamp(3rem, 7vh, 10rem);
 
 		.rdt input {
 			background-color: var(--input-background) !important;
@@ -239,4 +238,5 @@ const Div = styled.div<{ isAvailable: boolean, isExpanded?: boolean }>`
     	margin-top: 0.5rem;
 		}
 	}
+	
 `

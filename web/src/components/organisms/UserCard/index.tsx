@@ -5,6 +5,7 @@ import { Editicon } from 'components/atoms'
 import { ReservationList } from 'components/templates'
 import { useNavigate } from 'react-router'
 import { IReservationResponse } from 'types/reservation'
+import { popping } from 'animations'
 
 interface Props {
 	user: {
@@ -49,6 +50,7 @@ export const UserCard: React.FC<Props> = ({ user }) => {
 const Div = styled.div<{ isExpanded: boolean }>`
 	width: calc(90% - 4rem);
 	margin: auto;
+	animation: ${popping} 300ms ease-in-out;
 	padding: 1rem 2rem;
 	height: ${({ isExpanded }) => isExpanded ? '260px' : '30px'};
 	overflow: ${({ isExpanded }) => isExpanded ? 'scroll' : 'hidden'};
