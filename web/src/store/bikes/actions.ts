@@ -16,8 +16,11 @@ export const getBikes = (dispatch: Dispatch) => {
 					...bike,
 					reservations
 				})
-			})		
-			updateBikes(dispatch, await Promise.all(bikesWithReservations))
+			})
+			
+			const result = await Promise.all(bikesWithReservations)
+			updateBikes(dispatch, result)
+			return result
 		})
 		.catch(error => notifyError(error.request.response))
 }

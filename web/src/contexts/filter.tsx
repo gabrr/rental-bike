@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllBikes } from 'services/bike'
 import { getReservationByBike } from 'services/reservation'
-import { updateBikes } from 'store/bikes/actions'
+import { getBikes, updateBikes } from 'store/bikes/actions'
 import { IBike } from 'types/bike'
 import { notifyError } from 'utils/notifier'
 
@@ -33,20 +33,12 @@ export const FilterProvider: React.FC<Props> = ({ children }) => {
 	const [allBikes, setAllBikes] = useState<IBike[]>([])
 
 	useEffect(() => {
-		getAllBikes()
-		.then(async (bikes) => {
-			const bikesWithReservations = bikes.map(async (bike) => {
-				const reservations = await getReservationByBike(bike._id);
-	
-				return ({
-					...bike,
-					reservations
-				})
+		getBikes(dispatch)
+			.then(data => {
+				setAllBikes(data as any)
+				console.log(data)
 			})
-			const result = await Promise.all(bikesWithReservations)
-			setAllBikes(result as any)
-		})
-		.catch(error => notifyError(error.request.response))
+			.catch(error => notifyError(error.request.response))		
 	}, [])
 
 	useEffect(() => {
