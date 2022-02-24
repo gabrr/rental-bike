@@ -41,7 +41,10 @@ export const BikeCard: React.FC<Props> = ({ bike, user }) => {
 		}, 250)
 	}
 
-	const goToEditBike = () => navigate(`/edit-bike/${bike._id}`)
+	const goToEditBike = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.stopPropagation()
+		navigate(`/edit-bike/${bike._id}`)
+	}
 	
 	const isAvailable = false
 

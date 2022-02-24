@@ -11,6 +11,8 @@ import { ImageUploader } from 'components/organisms'
 import { BIKE_INPUT_ERRORS, isBikeInputValid } from 'utils/inputValidators'
 import { deleteBike, editBike, getAllBikes } from 'services/bike'
 import { notifyError } from 'utils/notifier'
+import { BIKE_MODELS, COLORS, LOCATIONS } from 'mock/assistence'
+import { bikeRateAverage } from 'utils/bikeRatingAverage'
 
 interface IForm {
 	name?: string
@@ -74,6 +76,11 @@ export const EditBike = () => {
 		seteditingBike(prev => ({ ...prev, [name]: value }))
 	}
 
+	const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>, name: string) => {
+		const value = e.currentTarget.value
+		seteditingBike(prev => ({ ...prev, [name]: value }))
+	}
+
 	return (
 		<CreateEdit role='admin' title='Edit Bike'>
 			<Div>
@@ -86,35 +93,29 @@ export const EditBike = () => {
 						defaultValue={bike?.name || ''}
 						onChange={(e) => handleInputs(e, 'name')}
 					/>
-					<Input
-						className='inputs'
-						placeholder='Model'
-						error={errors?.['model']}
-						type='text'
-						defaultValue={bike?.model || ''}
-						onChange={(e) => handleInputs(e, 'model')}
-					/>
-					<Input
-						className='inputs'
-						placeholder='Color'
-						error={errors?.['color']}
-						type='text'
-						defaultValue={bike?.color || ''}
-						onChange={(e) => handleInputs(e, 'color')}
-					/>
-					<Input
-						className='inputs'
-						placeholder='Address'
-						error={errors?.['address']}
-						type='text'
-						defaultValue={bike?.address || ''}
-						onChange={(e) => handleInputs(e, 'address')}
-					/>
+					<select defaultValue={bike.model} required name="model" id="model" onChange={(e) => handleSelect(e, 'model')}>
+						<option value="">Select a model</option>
+						{BIKE_MODELS.map((string) => {
+							return <option key={string} value={string}>{string}</option>
+						})}
+					</select>
+					<select defaultValue={bike.address} required name="address" id="address" onChange={(e) => handleSelect(e, 'address')}>
+						<option value="">Select a location</option>
+						{LOCATIONS.map((string) => {
+							return <option key={string} value={string}>{string}</option>
+						})}
+					</select>
+					<select defaultValue={bike.color} required name="color" id="color" onChange={(e) => handleSelect(e, 'color')}>
+						<option value="">Select a color</option>
+						{Object.entries(COLORS).map(([key]) => {
+							return <option key={key} value={key}>{key}</option>
+						})}
+					</select>
 				</form>
 
 				<div className='react_rating'>
 					<p className="rating_title">Initial Rating</p>
-					<ReactRating emptySymbol={<Star />} fullSymbol={<Star isFull />} />
+					<ReactRating initialRating={bikeRateAverage(bike)} emptySymbol={<Star />} fullSymbol={<Star isFull />} />
 				</div>
 
 				<ImageUploader
@@ -159,6 +160,12 @@ const Div = styled.div`
 	justify-content: center;
 	padding-bottom: 5rem;
 
+	form {
+		display: flex;
+    flex-direction: column;
+    gap: 10px;
+	}
+
 	.inputs {
 		width: 100%;
 		margin: 10px auto;
@@ -193,5 +200,15 @@ const Div = styled.div`
 		width: max-content;
 		padding: 10px 30px;
 		margin: 20px 0;
+	}
+
+	select {
+		width: 100%;
+		padding: 5px 10px;
+		height: 50px;
+		border: none;
+		background-color: var(--input-background);
+		color: var(--primary-text);
+		border-radius: var(--border-radius);
 	}
 `
