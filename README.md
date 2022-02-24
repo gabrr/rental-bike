@@ -23,9 +23,9 @@ App features a simple and light design, image upload and smooth animations.
 **It has known problems that it won't be possible to be fixed or improved within the timeline.**
 
 **Problems:**
-- The Card, would be better to full screen due to scroll problems as well as clicks propagating.
 - The dropfile is firing an event.
 - The filter menu should close on the blur event.
+- I left to think about the "cause" that would make a bike unavailable, since it will actually be unavailable only during the reservations period. One possibility would be to leave fo the admin but time is up!
 
 # Starting the Project
 `git clone https://git.toptal.com/screening/Gabriel-Oliveira-2/`
