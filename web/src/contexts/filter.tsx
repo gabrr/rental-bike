@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { getAllBikes } from 'services/bike'
+import { getReservationByBike } from 'services/reservation'
 import { updateBikes } from 'store/bikes/actions'
 import { IBike } from 'types/bike'
+import { notifyError } from 'utils/notifier'
 
 interface FilterContextType {
   isOpen: boolean
@@ -25,15 +28,32 @@ interface FilterOptions {
 export const FilterProvider: React.FC<Props> = ({ children }) => {
 	const dispatch = useDispatch()
 
-	const bikesFromStore = useSelector(state => state.bikeReducer)
   const [isOpen, setisOpen] = useState<boolean>(false)
 	const [filterOptions, setfilterOptions] = useState<FilterOptions>({} as FilterOptions)
-	const [allBikes] = useState<IBike[]>(bikesFromStore)
+	const [allBikes, setAllBikes] = useState<IBike[]>([])
+
+	useEffect(() => {
+		getAllBikes()
+		.then(async (bikes) => {
+			const bikesWithReservations = bikes.map(async (bike) => {
+				const reservations = await getReservationByBike(bike._id);
+	
+				return ({
+					...bike,
+					reservations
+				})
+			})
+			const result = await Promise.all(bikesWithReservations)
+			setAllBikes(result as any)
+		})
+		.catch(error => notifyError(error.request.response))
+	}, [])
 
 	useEffect(() => {
 		const { addressF, colorF, modelF, timeFrame } = filterOptions
 
 		const filterBikes = () => {
+			if (!allBikes.length) return
 			return allBikes.filter(({ address, color, model, reservations }) => {
 				let result = true
 				
@@ -64,7 +84,7 @@ export const FilterProvider: React.FC<Props> = ({ children }) => {
 
 		const result = filterBikes()
 
-		updateBikes(dispatch, result)
+		if (result) updateBikes(dispatch, result as any)
 
 	}, [filterOptions])
 
