@@ -73,7 +73,7 @@ const Div = styled.div`
 	border-top-left-radius: 30px;
 	border-top-right-radius: 30px;
 	box-shadow: 0px -10px 24px 0px rgba(0, 0, 0, 0.08);
-	transform: translateY(70vh);
+	transform: translateY(550vh);
 	transition: transform 300ms ease-in-out;
 
 	&.opened {
