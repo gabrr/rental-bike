@@ -206,18 +206,21 @@
 		},
 		{
 			"name": "all bikes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "apikey",
 					"apikey": [
 						{
 							"key": "value",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE0ZTVjZDE3OWI0Y2Q4MjI2YzM3ODEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU1NzY1NzAsImV4cCI6MTY0NTU4Mzc3MH0.epRsGERHbHQvxS3pm_grknsytao5ppJRspWBE13KENM; Max-Age=604; Path=/; Expires=Wed, 23 Feb 2022 00:46:15 GMT; HttpOnly",
 							"type": "string"
 						},
 						{
 							"key": "key",
-							"value": "auth-token",
+							"value": "Set-Cookie",
 							"type": "string"
 						}
 					]
@@ -230,6 +233,15 @@
 						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rate\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:8000/api/bike",
 					"protocol": "http",
@@ -351,7 +363,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/user/delete-user/6214e123e0d9df8ffb139d87",
+					"raw": "http://localhost:8000/api/reservation/delete-reservation/6214f4a286a1976103a316b5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -359,9 +371,9 @@
 					"port": "8000",
 					"path": [
 						"api",
-						"user",
-						"delete-user",
-						"6214e123e0d9df8ffb139d87"
+						"reservation",
+						"delete-reservation",
+						"6214f4a286a1976103a316b5"
 					]
 				}
 			},
@@ -549,6 +561,51 @@
 			"response": []
 		},
 		{
+			"name": "rate bike",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEzZTIxODZjNzUxNjcxNjhmMWQ0ZGYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU0OTk4MDJ9.vARP0ItbKRpS-D24ig7RKBkhTQyfP6bTqaGKo8-HvBs",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "auth-token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Bike Z2\",\n    \"model\": \"Z\",\n    \"color\": \"red\",\n    \"img\": \"http://image-source.com\",\n    \"address\": \"Centro, Florianópolis\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/bike/create-bike",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"bike",
+						"create-bike"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Edit User",
 			"request": {
 				"auth": {
@@ -685,6 +742,21 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE0ZTVjZDE3OWI0Y2Q4MjI2YzM3ODEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDU1NzY1NzAsImV4cCI6MTY0NTU4Mzc3MH0.epRsGERHbHQvxS3pm_grknsytao5ppJRspWBE13KENM; Max-Age=604; Path=/; Expires=Wed, 23 Feb 2022 00:46:15 GMT; HttpOnly"
 		}
 	]
 }
