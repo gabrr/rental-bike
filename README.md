@@ -55,6 +55,7 @@ We can do the same for the web folder
 
 
 1. *When you signup the first user, another admin user will be created — your first user should not use admin credentials.*
+
 **email:** admin@admin.com
 **password:** admin123
 
