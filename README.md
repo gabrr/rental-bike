@@ -28,7 +28,7 @@ App features a simple and light design, image upload and smooth animations.
 - I left to think about the "cause" that would make a bike unavailable, since it will actually be unavailable only during the reservations period. One possibility would be to leave fo the admin but time is up!
 
 # Starting the Project
-`git clone https://git.toptal.com/screening/Gabriel-Oliveira-2/`
+`https://github.com/gabrr/rental-bike/`
 
 Now, you will want to create .env file for the two folders — web and server.
 
